@@ -8,43 +8,54 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace BitmatEditor
 {
 	public partial class Result : Form
 	{
-		List<UInt32> data;
-		int Row;
-		int Col;
-		int BitsPerColor;
-
-		public Result(List<UInt32> list, int row, int col, int bpc)
+		public Result()
 		{
 			InitializeComponent();
-
-			data = list;
-			Row = row;
-			Col = col;
-			BitsPerColor = bpc;
-
-			MakeString();
 		}
 
-		public void MakeString()
+        public void ListAbsPoints(List<PointInfo> list, int row, int col)
+        {
+			rtbResult.Clear();
+            for (int cnt = 0; cnt < list.Count; cnt++)
+            {
+                PointInfo info = list[cnt];
+                rtbResult.AppendText(
+                        string.Format("{0}: {1}, {2}\n",
+                            GetName(info.Type), info.X, row - 1 - info.Y)
+                    );
+            }
+        }
+
+        public void ListRelativePoints(List<PointInfo> list, int row, int col)
+        {
+            rtbResult.Clear();
+            for (int cnt = 0; cnt < list.Count; cnt++)
+            {
+                PointInfo info = list[cnt];
+				float rel_x = (float)(info.X) / (float)col;
+                float rel_y = (float)(row-1-info.Y) / (float)row;
+
+                rtbResult.AppendText(
+                        string.Format("{0}: {1}*width, {2}*height\n",
+                            GetName(info.Type), rel_x, rel_y)
+                    );
+            }
+        }
+
+        private string GetName(int index)
 		{
-			int r_cnt = 0;
-			int c_cnt = 0;
-			int col_byte = (int)Math.Round(((float)(BitsPerColor * Col) / 8) + 0.5);
-			for (r_cnt = 0; r_cnt < Row; r_cnt++)
+			switch(index)
 			{
-				string strRow = "";
-				for (c_cnt = 0; c_cnt < col_byte; c_cnt++)
-				{
-					UInt32 d = data.ElementAt(r_cnt * col_byte + c_cnt);
-					strRow += "0x" + d.ToString("X2") + ", ";
-				}
-				strRow += "\n";
-				rtbResult.AppendText(strRow);
+				case 0:  return "Line ";
+				case 1:  return "Arc  ";
+				case 2:  return "Point";
+				default: return "None ";
 			}
 		}
 

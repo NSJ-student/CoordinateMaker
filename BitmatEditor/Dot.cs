@@ -9,10 +9,11 @@ using System.Windows.Forms;
 
 namespace BitmatEditor
 {
-    class Dot
+    public class Dot
     {
         int RowVal;
 		int ColVal;
+		int ColorIndex;
         Color? FillColor;
         bool bFocus;
 
@@ -40,8 +41,15 @@ namespace BitmatEditor
 			{
 				return ColVal;
 			}
-		}
-		public Color? BackColor
+        }
+        public int Index
+        {
+            get
+            {
+                return ColorIndex;
+            }
+        }
+        public Color? BackColor
 		{
 			get
 			{
@@ -52,6 +60,7 @@ namespace BitmatEditor
         {
 			RowVal = row;
 			ColVal = col;
+			ColorIndex = -1;
             FillColor = color;
             bFocus = false;
         }
@@ -59,7 +68,12 @@ namespace BitmatEditor
         {
             FillColor = color;
         }
-		public void ToggleFocus()
+        public void SetColor(Color? color, int index)
+        {
+            FillColor = color;
+            ColorIndex = index;
+        }
+        public void ToggleFocus()
 		{
 			if (bFocus) bFocus = false;
 			else bFocus = true;
@@ -71,7 +85,7 @@ namespace BitmatEditor
 				(area.Y + area.Height * Row),
 				area.Width, 
 				area.Height );
-			Color color = (FillColor != null) ? (Color)FillColor : (Color)SystemColors.Control;
+			Color color = (FillColor != null) ? (Color)FillColor : Color.FromArgb(0,0,0,0);
 
 			if (bFocus)
 			{
@@ -91,14 +105,14 @@ namespace BitmatEditor
         }
     }
 
-    class DotMatrix
+    public class DotMatrix
     {
 		public delegate UInt32 ColorToBits(Color? color);
-		List<List<Dot>> DotMat;
-		int Row;
-		int Col;
+        List<List<Dot>> DotMat;
+        int Row;
+        int Col;
 
-		public DotMatrix(int row, int col)
+        public DotMatrix(int row, int col)
         {
 			int r_cnt = 0;
 			int c_cnt = 0;
