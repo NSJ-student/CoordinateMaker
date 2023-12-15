@@ -36,7 +36,9 @@
             this.btnColorValue = new System.Windows.Forms.Button();
             this.gbControl = new System.Windows.Forms.GroupBox();
             this.nudColCnt = new System.Windows.Forms.NumericUpDown();
+            this.btnReset = new System.Windows.Forms.Button();
             this.nudRowCnt = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.lbColCnt = new System.Windows.Forms.Label();
             this.lbRowCnt = new System.Windows.Forms.Label();
             this.btnRemoveBackground = new System.Windows.Forms.Button();
@@ -51,21 +53,43 @@
             this.cbBrushColor = new System.Windows.Forms.CheckBox();
             this.tlpProperty = new System.Windows.Forms.TableLayoutPanel();
             this.pDiaplay = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.nBackgroundTextAlpha = new System.Windows.Forms.NumericUpDown();
+            this.btnBackgroundTextFont = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nBackgroundTextOffsetY = new System.Windows.Forms.NumericUpDown();
+            this.nBackgroundTextSize = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtBackgroundText = new System.Windows.Forms.TextBox();
+            this.btnClearBackgroundText = new System.Windows.Forms.Button();
+            this.btnSetBackgroundText = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnMakeAbsolute = new System.Windows.Forms.Button();
+            this.btnMakeRelative = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.nBackgroundAlpha = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnMakeAbsolute = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
-            this.btnMakeRelative = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lblCurrentRatio = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nDotAlpha = new System.Windows.Forms.NumericUpDown();
             this.gbControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColCnt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRowCnt)).BeginInit();
             this.tlpProperty.SuspendLayout();
             this.pDiaplay.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundAlpha)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nDotAlpha)).BeginInit();
             this.SuspendLayout();
             // 
             // lbRow
@@ -83,7 +107,7 @@
             // 
             this.lbRowValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbRowValue.AutoSize = true;
-            this.lbRowValue.Location = new System.Drawing.Point(93, 12);
+            this.lbRowValue.Location = new System.Drawing.Point(92, 12);
             this.lbRowValue.Margin = new System.Windows.Forms.Padding(4, 0, 3, 0);
             this.lbRowValue.Name = "lbRowValue";
             this.lbRowValue.Size = new System.Drawing.Size(11, 12);
@@ -105,7 +129,7 @@
             // 
             this.lbColValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbColValue.AutoSize = true;
-            this.lbColValue.Location = new System.Drawing.Point(93, 36);
+            this.lbColValue.Location = new System.Drawing.Point(92, 36);
             this.lbColValue.Margin = new System.Windows.Forms.Padding(4, 0, 3, 0);
             this.lbColValue.Name = "lbColValue";
             this.lbColValue.Size = new System.Drawing.Size(11, 12);
@@ -126,7 +150,7 @@
             // btnColorValue
             // 
             this.btnColorValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnColorValue.Location = new System.Drawing.Point(93, 57);
+            this.btnColorValue.Location = new System.Drawing.Point(92, 57);
             this.btnColorValue.Margin = new System.Windows.Forms.Padding(4, 2, 3, 2);
             this.btnColorValue.Name = "btnColorValue";
             this.btnColorValue.Size = new System.Drawing.Size(73, 18);
@@ -136,16 +160,18 @@
             // 
             // gbControl
             // 
+            this.gbControl.Controls.Add(this.lblCurrentRatio);
             this.gbControl.Controls.Add(this.nudColCnt);
             this.gbControl.Controls.Add(this.btnReset);
             this.gbControl.Controls.Add(this.nudRowCnt);
+            this.gbControl.Controls.Add(this.label8);
             this.gbControl.Controls.Add(this.lbColCnt);
             this.gbControl.Controls.Add(this.lbRowCnt);
             this.gbControl.Location = new System.Drawing.Point(11, 11);
             this.gbControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbControl.Name = "gbControl";
             this.gbControl.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbControl.Size = new System.Drawing.Size(199, 79);
+            this.gbControl.Size = new System.Drawing.Size(199, 108);
             this.gbControl.TabIndex = 3;
             this.gbControl.TabStop = false;
             this.gbControl.Text = "Size";
@@ -153,7 +179,7 @@
             // nudColCnt
             // 
             this.nudColCnt.AutoSize = true;
-            this.nudColCnt.Location = new System.Drawing.Point(66, 46);
+            this.nudColCnt.Location = new System.Drawing.Point(66, 44);
             this.nudColCnt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudColCnt.Minimum = new decimal(new int[] {
             1,
@@ -171,6 +197,16 @@
             0});
             this.nudColCnt.ValueChanged += new System.EventHandler(this.nudColCnt_ValueChanged);
             this.nudColCnt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudColCnt_KeyUp);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(152, 18);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(41, 73);
+            this.btnReset.TabIndex = 13;
+            this.btnReset.Text = "RST";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // nudRowCnt
             // 
@@ -194,10 +230,19 @@
             this.nudRowCnt.ValueChanged += new System.EventHandler(this.nudRowCnt_ValueChanged);
             this.nudRowCnt.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudRowCnt_KeyUp);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 72);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Ratio :";
+            // 
             // lbColCnt
             // 
             this.lbColCnt.AutoSize = true;
-            this.lbColCnt.Location = new System.Drawing.Point(12, 48);
+            this.lbColCnt.Location = new System.Drawing.Point(12, 46);
             this.lbColCnt.Name = "lbColCnt";
             this.lbColCnt.Size = new System.Drawing.Size(43, 12);
             this.lbColCnt.TabIndex = 1;
@@ -206,7 +251,7 @@
             // lbRowCnt
             // 
             this.lbRowCnt.AutoSize = true;
-            this.lbRowCnt.Location = new System.Drawing.Point(12, 23);
+            this.lbRowCnt.Location = new System.Drawing.Point(12, 20);
             this.lbRowCnt.Name = "lbRowCnt";
             this.lbRowCnt.Size = new System.Drawing.Size(48, 12);
             this.lbRowCnt.TabIndex = 0;
@@ -214,9 +259,9 @@
             // 
             // btnRemoveBackground
             // 
-            this.btnRemoveBackground.Location = new System.Drawing.Point(132, 29);
+            this.btnRemoveBackground.Location = new System.Drawing.Point(99, 20);
             this.btnRemoveBackground.Name = "btnRemoveBackground";
-            this.btnRemoveBackground.Size = new System.Drawing.Size(51, 39);
+            this.btnRemoveBackground.Size = new System.Drawing.Size(84, 26);
             this.btnRemoveBackground.TabIndex = 13;
             this.btnRemoveBackground.Text = "Clear";
             this.btnRemoveBackground.UseVisualStyleBackColor = true;
@@ -224,11 +269,11 @@
             // 
             // btnLoadBackground
             // 
-            this.btnLoadBackground.Location = new System.Drawing.Point(14, 29);
+            this.btnLoadBackground.Location = new System.Drawing.Point(14, 20);
             this.btnLoadBackground.Name = "btnLoadBackground";
-            this.btnLoadBackground.Size = new System.Drawing.Size(112, 39);
+            this.btnLoadBackground.Size = new System.Drawing.Size(84, 26);
             this.btnLoadBackground.TabIndex = 12;
-            this.btnLoadBackground.Text = "Load Background";
+            this.btnLoadBackground.Text = "Load";
             this.btnLoadBackground.UseVisualStyleBackColor = true;
             this.btnLoadBackground.Click += new System.EventHandler(this.btnLoadBackground_Click);
             // 
@@ -321,7 +366,7 @@
             this.tlpProperty.Controls.Add(this.lbColValue, 1, 2);
             this.tlpProperty.Controls.Add(this.lbRowValue, 1, 1);
             this.tlpProperty.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tlpProperty.Location = new System.Drawing.Point(0, 513);
+            this.tlpProperty.Location = new System.Drawing.Point(0, 693);
             this.tlpProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tlpProperty.Name = "tlpProperty";
             this.tlpProperty.RowCount = 5;
@@ -330,45 +375,263 @@
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tlpProperty.Size = new System.Drawing.Size(223, 86);
+            this.tlpProperty.Size = new System.Drawing.Size(222, 86);
             this.tlpProperty.TabIndex = 0;
             // 
             // pDiaplay
             // 
+            this.pDiaplay.AutoScroll = true;
+            this.pDiaplay.Controls.Add(this.groupBox4);
             this.pDiaplay.Controls.Add(this.groupBox3);
             this.pDiaplay.Controls.Add(this.groupBox2);
             this.pDiaplay.Controls.Add(this.groupBox1);
             this.pDiaplay.Controls.Add(this.tlpProperty);
             this.pDiaplay.Controls.Add(this.gbControl);
             this.pDiaplay.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pDiaplay.Location = new System.Drawing.Point(616, 0);
+            this.pDiaplay.Location = new System.Drawing.Point(637, 0);
             this.pDiaplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pDiaplay.Name = "pDiaplay";
-            this.pDiaplay.Size = new System.Drawing.Size(223, 599);
+            this.pDiaplay.Size = new System.Drawing.Size(239, 578);
             this.pDiaplay.TabIndex = 5;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.nBackgroundTextAlpha);
+            this.groupBox4.Controls.Add(this.btnBackgroundTextFont);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.nBackgroundTextOffsetY);
+            this.groupBox4.Controls.Add(this.nBackgroundTextSize);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.txtBackgroundText);
+            this.groupBox4.Controls.Add(this.btnClearBackgroundText);
+            this.groupBox4.Controls.Add(this.btnSetBackgroundText);
+            this.groupBox4.Location = new System.Drawing.Point(11, 456);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(199, 169);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Background Text";
+            // 
+            // nBackgroundTextAlpha
+            // 
+            this.nBackgroundTextAlpha.Location = new System.Drawing.Point(68, 77);
+            this.nBackgroundTextAlpha.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nBackgroundTextAlpha.Name = "nBackgroundTextAlpha";
+            this.nBackgroundTextAlpha.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundTextAlpha.TabIndex = 15;
+            this.nBackgroundTextAlpha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundTextAlpha.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nBackgroundTextAlpha.ValueChanged += new System.EventHandler(this.nBackgroundTextAlpha_ValueChanged);
+            // 
+            // btnBackgroundTextFont
+            // 
+            this.btnBackgroundTextFont.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnBackgroundTextFont.Location = new System.Drawing.Point(69, 48);
+            this.btnBackgroundTextFont.Name = "btnBackgroundTextFont";
+            this.btnBackgroundTextFont.Size = new System.Drawing.Size(114, 23);
+            this.btnBackgroundTextFont.TabIndex = 5;
+            this.btnBackgroundTextFont.Text = "Courier New";
+            this.btnBackgroundTextFont.UseVisualStyleBackColor = true;
+            this.btnBackgroundTextFont.Click += new System.EventHandler(this.btnBackgroundTextFont_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 79);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 12);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Alpha :";
+            // 
+            // nBackgroundTextOffsetY
+            // 
+            this.nBackgroundTextOffsetY.Location = new System.Drawing.Point(69, 104);
+            this.nBackgroundTextOffsetY.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nBackgroundTextOffsetY.Name = "nBackgroundTextOffsetY";
+            this.nBackgroundTextOffsetY.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundTextOffsetY.TabIndex = 4;
+            this.nBackgroundTextOffsetY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundTextOffsetY.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetY_ValueChanged);
+            // 
+            // nBackgroundTextSize
+            // 
+            this.nBackgroundTextSize.Location = new System.Drawing.Point(69, 21);
+            this.nBackgroundTextSize.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nBackgroundTextSize.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nBackgroundTextSize.Name = "nBackgroundTextSize";
+            this.nBackgroundTextSize.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundTextSize.TabIndex = 4;
+            this.nBackgroundTextSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundTextSize.Value = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.nBackgroundTextSize.ValueChanged += new System.EventHandler(this.nBackgroundTextSize_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 106);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 12);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Offset Y :";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 12);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Size :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 12);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Font :";
+            // 
+            // txtBackgroundText
+            // 
+            this.txtBackgroundText.Location = new System.Drawing.Point(14, 135);
+            this.txtBackgroundText.Name = "txtBackgroundText";
+            this.txtBackgroundText.Size = new System.Drawing.Size(67, 21);
+            this.txtBackgroundText.TabIndex = 2;
+            // 
+            // btnClearBackgroundText
+            // 
+            this.btnClearBackgroundText.Location = new System.Drawing.Point(138, 131);
+            this.btnClearBackgroundText.Name = "btnClearBackgroundText";
+            this.btnClearBackgroundText.Size = new System.Drawing.Size(45, 26);
+            this.btnClearBackgroundText.TabIndex = 1;
+            this.btnClearBackgroundText.Text = "Clear";
+            this.btnClearBackgroundText.UseVisualStyleBackColor = true;
+            this.btnClearBackgroundText.Click += new System.EventHandler(this.btnClearBackgroundText_Click);
+            // 
+            // btnSetBackgroundText
+            // 
+            this.btnSetBackgroundText.Location = new System.Drawing.Point(87, 131);
+            this.btnSetBackgroundText.Name = "btnSetBackgroundText";
+            this.btnSetBackgroundText.Size = new System.Drawing.Size(45, 26);
+            this.btnSetBackgroundText.TabIndex = 0;
+            this.btnSetBackgroundText.Text = "Set";
+            this.btnSetBackgroundText.UseVisualStyleBackColor = true;
+            this.btnSetBackgroundText.Click += new System.EventHandler(this.btnSetBackgroundText_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnMakeAbsolute);
+            this.groupBox3.Controls.Add(this.btnMakeRelative);
+            this.groupBox3.Location = new System.Drawing.Point(11, 631);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(199, 62);
+            this.groupBox3.TabIndex = 15;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Make Pooint List";
+            // 
+            // btnMakeAbsolute
+            // 
+            this.btnMakeAbsolute.Location = new System.Drawing.Point(8, 23);
+            this.btnMakeAbsolute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMakeAbsolute.Name = "btnMakeAbsolute";
+            this.btnMakeAbsolute.Size = new System.Drawing.Size(85, 26);
+            this.btnMakeAbsolute.TabIndex = 4;
+            this.btnMakeAbsolute.Text = "Absolute";
+            this.btnMakeAbsolute.UseVisualStyleBackColor = true;
+            this.btnMakeAbsolute.Click += new System.EventHandler(this.btnMakeAbsolute_Click);
+            // 
+            // btnMakeRelative
+            // 
+            this.btnMakeRelative.Location = new System.Drawing.Point(99, 23);
+            this.btnMakeRelative.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMakeRelative.Name = "btnMakeRelative";
+            this.btnMakeRelative.Size = new System.Drawing.Size(85, 26);
+            this.btnMakeRelative.TabIndex = 4;
+            this.btnMakeRelative.Text = "Relative";
+            this.btnMakeRelative.UseVisualStyleBackColor = true;
+            this.btnMakeRelative.Click += new System.EventHandler(this.btnMakeRelative_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.nBackgroundAlpha);
+            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.btnLoadBackground);
             this.groupBox2.Controls.Add(this.btnRemoveBackground);
-            this.groupBox2.Location = new System.Drawing.Point(11, 317);
+            this.groupBox2.Location = new System.Drawing.Point(11, 368);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(199, 83);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Background Image";
             // 
+            // nBackgroundAlpha
+            // 
+            this.nBackgroundAlpha.Location = new System.Drawing.Point(69, 52);
+            this.nBackgroundAlpha.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nBackgroundAlpha.Name = "nBackgroundAlpha";
+            this.nBackgroundAlpha.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundAlpha.TabIndex = 15;
+            this.nBackgroundAlpha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundAlpha.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nBackgroundAlpha.ValueChanged += new System.EventHandler(this.nBackgroundAlpha_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 12);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Alpha :";
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nDotAlpha);
             this.groupBox1.Controls.Add(this.cbBrushColor);
             this.groupBox1.Controls.Add(this.lvColorList);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cbFillAreaColor);
             this.groupBox1.Controls.Add(this.lbSelectedColor);
-            this.groupBox1.Location = new System.Drawing.Point(11, 95);
+            this.groupBox1.Location = new System.Drawing.Point(11, 124);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(199, 216);
+            this.groupBox1.Size = new System.Drawing.Size(199, 238);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Draw";
@@ -382,54 +645,47 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Action :";
             // 
-            // btnMakeAbsolute
+            // lblCurrentRatio
             // 
-            this.btnMakeAbsolute.Location = new System.Drawing.Point(8, 23);
-            this.btnMakeAbsolute.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnMakeAbsolute.Name = "btnMakeAbsolute";
-            this.btnMakeAbsolute.Size = new System.Drawing.Size(85, 42);
-            this.btnMakeAbsolute.TabIndex = 4;
-            this.btnMakeAbsolute.Text = "Absolute";
-            this.btnMakeAbsolute.UseVisualStyleBackColor = true;
-            this.btnMakeAbsolute.Click += new System.EventHandler(this.btnMakeAbsolute_Click);
+            this.lblCurrentRatio.AutoSize = true;
+            this.lblCurrentRatio.Location = new System.Drawing.Point(66, 72);
+            this.lblCurrentRatio.Name = "lblCurrentRatio";
+            this.lblCurrentRatio.Size = new System.Drawing.Size(0, 12);
+            this.lblCurrentRatio.TabIndex = 14;
             // 
-            // btnReset
+            // label9
             // 
-            this.btnReset.Location = new System.Drawing.Point(152, 18);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(41, 49);
-            this.btnReset.TabIndex = 13;
-            this.btnReset.Text = "RST";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 211);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(45, 12);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Alpha :";
             // 
-            // btnMakeRelative
+            // nDotAlpha
             // 
-            this.btnMakeRelative.Location = new System.Drawing.Point(99, 23);
-            this.btnMakeRelative.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnMakeRelative.Name = "btnMakeRelative";
-            this.btnMakeRelative.Size = new System.Drawing.Size(85, 42);
-            this.btnMakeRelative.TabIndex = 4;
-            this.btnMakeRelative.Text = "Relative";
-            this.btnMakeRelative.UseVisualStyleBackColor = true;
-            this.btnMakeRelative.Click += new System.EventHandler(this.btnMakeRelative_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnMakeAbsolute);
-            this.groupBox3.Controls.Add(this.btnMakeRelative);
-            this.groupBox3.Location = new System.Drawing.Point(11, 406);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(196, 81);
-            this.groupBox3.TabIndex = 15;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Make Pooint List";
+            this.nDotAlpha.Location = new System.Drawing.Point(80, 209);
+            this.nDotAlpha.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nDotAlpha.Name = "nDotAlpha";
+            this.nDotAlpha.Size = new System.Drawing.Size(102, 21);
+            this.nDotAlpha.TabIndex = 15;
+            this.nDotAlpha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nDotAlpha.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nDotAlpha.ValueChanged += new System.EventHandler(this.nDotAlpha_ValueChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 599);
+            this.ClientSize = new System.Drawing.Size(876, 578);
             this.Controls.Add(this.pDiaplay);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
@@ -453,10 +709,18 @@
             this.tlpProperty.ResumeLayout(false);
             this.tlpProperty.PerformLayout();
             this.pDiaplay.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundAlpha)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nDotAlpha)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -492,6 +756,24 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnMakeRelative;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nBackgroundAlpha;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnClearBackgroundText;
+        private System.Windows.Forms.Button btnSetBackgroundText;
+        private System.Windows.Forms.TextBox txtBackgroundText;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown nBackgroundTextSize;
+        private System.Windows.Forms.Button btnBackgroundTextFont;
+        private System.Windows.Forms.NumericUpDown nBackgroundTextOffsetY;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown nBackgroundTextAlpha;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblCurrentRatio;
+        private System.Windows.Forms.NumericUpDown nDotAlpha;
+        private System.Windows.Forms.Label label9;
     }
 }
 

@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace BitmatEditor
 {
@@ -18,6 +19,8 @@ namespace BitmatEditor
 		int SelectedIndex;
 		RectangleF MatrixArea;
 		Bitmap backgroundBitmap;
+		string backgroundText;
+		Font backgroundTextFont;
         Dot SelectedDot;
 		Dot MouseDownDot;
 		bool bDrag = false;
@@ -38,6 +41,8 @@ namespace BitmatEditor
             SelectedDot = null;
 			MouseDownDot = null;
 			backgroundBitmap = null;
+			backgroundText = "";
+			backgroundTextFont = btnBackgroundTextFont.Font;
 
 			resultDialog = null;
 
@@ -49,9 +54,9 @@ namespace BitmatEditor
 
 			tlpProperty.Visible = false;
 
-            AddColorList("Line", Color.FromArgb(100, Color.Red));
-            AddColorList("Arc", Color.FromArgb(100, Color.Blue));
-            AddColorList("Point", Color.FromArgb(50, Color.Black));
+            AddColorList("Line", Color.FromArgb((int)nDotAlpha.Value, Color.Red));
+            AddColorList("Arc", Color.FromArgb((int)nDotAlpha.Value, Color.Blue));
+            AddColorList("Point", Color.FromArgb((int)nDotAlpha.Value, Color.Black));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,13 +74,15 @@ namespace BitmatEditor
 		{
 			matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
 			Invalidate(true);
-        }
+			SetDotRatio();
+		}
 
         private void nudRowCnt_ValueChanged(object sender, EventArgs e)
 		{
 			matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
 			Invalidate(true);
-        }
+			SetDotRatio();
+		}
 
         private void nudColCnt_ValueChanged(object sender, EventArgs e)
 		{
@@ -112,15 +119,33 @@ namespace BitmatEditor
                 e.Graphics.DrawString(col.ToString(), font, tBrush, areaC);
             }
 
-            if (backgroundBitmap == null)
+            if ((backgroundBitmap == null) && (backgroundText == ""))
             {
                 Brush brush = new SolidBrush(Color.White);
                 e.Graphics.FillRectangle(brush, MatrixArea);
             }
+			else if(backgroundText != "")
+			{
+				SizeF stringSize = new SizeF();
+				stringSize = e.Graphics.MeasureString(backgroundText, backgroundTextFont);
+				int leftMargin = (int)(MatrixArea.X + (MatrixArea.Width / 2) - (stringSize.Width / 2));
+				int topMargin = (int)(MatrixArea.Y + (MatrixArea.Height / 2) - (int)nBackgroundTextOffsetY.Value);
+				Brush bBrush = new SolidBrush(Color.FromArgb((int)nBackgroundTextAlpha.Value, 0, 0, 0));
+				e.Graphics.DrawString(backgroundText, backgroundTextFont, bBrush, leftMargin, topMargin);
+			}
 			else
-            {
-                e.Graphics.DrawImage(backgroundBitmap, MatrixArea);
-            }
+			{
+				//create a color matrix object  
+				ColorMatrix matrix = new ColorMatrix();
+				//set the opacity  
+				matrix.Matrix33 = (float)nBackgroundAlpha.Value / 255;
+				//create image attributes  
+				ImageAttributes attributes = new ImageAttributes();
+				//set the color(opacity) of the image  
+				attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+				e.Graphics.DrawImage(backgroundBitmap, new Rectangle((int)MatrixArea.X, (int)MatrixArea.Y, (int)MatrixArea.Width, (int)MatrixArea.Height), 
+								0, 0, backgroundBitmap.Width, backgroundBitmap.Height, GraphicsUnit.Pixel, attributes);
+			}
 
 			matrix.Draw(e, MatrixArea);
 		}
@@ -128,6 +153,12 @@ namespace BitmatEditor
 		private void Form1_SizeChanged(object sender, EventArgs e)
 		{
 			MatrixArea.Size = new Size(this.ClientSize.Width - pDiaplay.Width - 50, this.ClientSize.Height - 50);
+			Invalidate(true);
+			SetDotRatio();
+		}
+
+		private void nBackgroundAlpha_ValueChanged(object sender, EventArgs e)
+		{
 			Invalidate(true);
 		}
 
@@ -243,7 +274,7 @@ namespace BitmatEditor
 		{
 			if(cbBrushColor.Checked)
 			{
-				this.Cursor = Cursors.AppStarting;
+				this.Cursor = Cursors.Cross;
 				if (cbFillAreaColor.Checked)
 					cbFillAreaColor.Checked = false;
 			}
@@ -532,6 +563,74 @@ namespace BitmatEditor
             }
         }
 
+        private void btnSetBackgroundText_Click(object sender, EventArgs e)
+        {
+			backgroundText = txtBackgroundText.Text;
+			Invalidate();
+		}
+
+        private void btnClearBackgroundText_Click(object sender, EventArgs e)
+        {
+			backgroundText = "";
+			Invalidate();
+		}
+
+        private void btnBackgroundTextFont_Click(object sender, EventArgs e)
+		{
+			FontDialog dialog = new FontDialog();
+
+			DialogResult result = dialog.ShowDialog();
+			if(result == DialogResult.OK)
+			{
+				backgroundTextFont = dialog.Font;
+
+				nBackgroundTextSize.Value = (decimal)backgroundTextFont.Size;
+
+				btnBackgroundTextFont.Text = backgroundTextFont.Name;
+				btnBackgroundTextFont.Font = new Font(backgroundTextFont.Name, 9.0F);
+				Invalidate();
+			}
+		}
+
+        private void nBackgroundTextSize_ValueChanged(object sender, EventArgs e)
+		{
+			backgroundTextFont = new Font(backgroundTextFont.FontFamily, (float)nBackgroundTextSize.Value);
+			Invalidate();
+		}
+
+        private void nBackgroundTextOffsetY_ValueChanged(object sender, EventArgs e)
+		{
+			Invalidate();
+		}
+
+        private void nBackgroundTextAlpha_ValueChanged(object sender, EventArgs e)
+		{
+			Invalidate();
+		}
+
+		private void SetDotRatio()
+		{
+			int Row = (int)nudRowCnt.Value;
+			int Col = (int)nudColCnt.Value;
+			float Width = MatrixArea.Width / Col;
+			float Height = MatrixArea.Height / Row;
+			lblCurrentRatio.Text = string.Format("{0:0.00#}x{1:0.00#} \n({2})", Width, Height, Width / Height);
+		}
+
+        private void nDotAlpha_ValueChanged(object sender, EventArgs e)
+		{
+			for(int cnt=0; cnt<3; cnt++)
+			{
+				ListViewItem item = lvColorList.Items[cnt];
+				Color color = item.SubItems[2].BackColor;
+				ListViewItemChangeColor(item, Color.FromArgb((int)nDotAlpha.Value, color.R, color.G, color.B));
+			}
+
+			SelectedColor = null;
+			SelectedIndex = -1;
+			lbSelectedColor.Text = "N";
+			Invalidate();
+		}
     }
 
     public class PointInfo
