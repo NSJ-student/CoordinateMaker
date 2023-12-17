@@ -13,11 +13,16 @@ using System.Drawing.Drawing2D;
 namespace BitmatEditor
 {
 	public partial class Result : Form
-	{
-		public Result()
+    {
+        GraphicsPath drawPath;
+
+        public Result()
 		{
 			InitializeComponent();
-		}
+
+			drawPath = null;
+
+        }
 
         public void ListAbsPoints(List<PointInfo> list, int row, int col)
         {
@@ -126,7 +131,9 @@ namespace BitmatEditor
 				rtbGenCode.AppendText(string.Format("graphicPath.AddLine(offsetX + ({0} * width), offsetY + ({1} * height),\n", X1, Y1));
 				rtbGenCode.AppendText(string.Format("\t\t\t\t\toffsetX + ({0} * width), offsetY + ({1} * height));\n", X2, Y2));
 			}
-		}
+
+			DrawLine();
+        }
 
         private void btnArcCode_Click(object sender, EventArgs e)
 		{
@@ -148,6 +155,53 @@ namespace BitmatEditor
 			}
 
 			rtbGenCode.AppendText("};\n");
-		}
+
+        }
+
+		private void DrawLine()
+        {
+            int selectedCnt = dgvResult.SelectedRows.Count;
+            if (selectedCnt < 2)
+            {
+                return;
+            }
+
+			int offsetX = 0;
+			int offsetY = 0;
+			int width = 64;
+			int height = 52;
+
+            drawPath = new GraphicsPath();
+
+            for (int row = 0; row < selectedCnt-1; row++)
+            {
+                double X1 = Convert.ToDouble(dgvResult.SelectedRows[row].Cells[1].Value.ToString().Replace("F", ""));
+                double Y1 = Convert.ToDouble(dgvResult.SelectedRows[row].Cells[2].Value.ToString().Replace("F", ""));
+                double X2 = Convert.ToDouble(dgvResult.SelectedRows[row + 1].Cells[1].Value.ToString().Replace("F", ""));
+                double Y2 = Convert.ToDouble(dgvResult.SelectedRows[row + 1].Cells[2].Value.ToString().Replace("F", ""));
+
+				drawPath.AddLine((float)(offsetX + (X1 * width)), (float)(offsetY + (Y1 * height)),
+                                 (float)(offsetX + (X2 * width)), (float)(offsetY + (Y2 * height)));
+            }
+
+
+            Matrix flipYMatrix = new Matrix(1, 0, 0, -1, 0, pDrawPath.Height / 2);
+            Matrix transformMatrix = new Matrix();
+            transformMatrix.Multiply(flipYMatrix);
+            transformMatrix.Translate(pDrawPath.Width / 4, 0, MatrixOrder.Append);
+            drawPath.Transform(transformMatrix);
+            pDrawPath.Invalidate();
+        }
+
+        private void pDrawPath_Paint(object sender, PaintEventArgs e)
+        {
+            if (drawPath != null)
+            {
+                drawPath.StartFigure(); // Start the firstfigure.
+
+                e.Graphics.DrawPath(new Pen(Color.Black, (float)2), drawPath);
+                drawPath.CloseFigure();
+            }
+        }
     }
 }

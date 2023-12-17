@@ -43,6 +43,7 @@
             this.btnLineCode = new System.Windows.Forms.Button();
             this.btnClearCode = new System.Windows.Forms.Button();
             this.btnArcCode = new System.Windows.Forms.Button();
+            this.pDrawPath = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -121,6 +122,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnLineCode, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnClearCode, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnArcCode, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.pDrawPath, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -139,12 +141,12 @@
             this.cPosX,
             this.cPosY,
             this.cType});
-            this.tableLayoutPanel1.SetColumnSpan(this.dgvResult, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.dgvResult, 2);
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.RowTemplate.Height = 23;
-            this.dgvResult.Size = new System.Drawing.Size(360, 238);
+            this.dgvResult.Size = new System.Drawing.Size(238, 238);
             this.dgvResult.TabIndex = 0;
             // 
             // cIndex
@@ -199,7 +201,7 @@
             this.btnLineCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnLineCode.Location = new System.Drawing.Point(3, 491);
             this.btnLineCode.Name = "btnLineCode";
-            this.btnLineCode.Size = new System.Drawing.Size(115, 25);
+            this.btnLineCode.Size = new System.Drawing.Size(116, 25);
             this.btnLineCode.TabIndex = 2;
             this.btnLineCode.Text = "Line Code";
             this.btnLineCode.UseVisualStyleBackColor = true;
@@ -208,9 +210,9 @@
             // btnClearCode
             // 
             this.btnClearCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearCode.Location = new System.Drawing.Point(245, 491);
+            this.btnClearCode.Location = new System.Drawing.Point(247, 491);
             this.btnClearCode.Name = "btnClearCode";
-            this.btnClearCode.Size = new System.Drawing.Size(118, 25);
+            this.btnClearCode.Size = new System.Drawing.Size(116, 25);
             this.btnClearCode.TabIndex = 3;
             this.btnClearCode.Text = "Clear Code";
             this.btnClearCode.UseVisualStyleBackColor = true;
@@ -219,13 +221,22 @@
             // btnArcCode
             // 
             this.btnArcCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnArcCode.Location = new System.Drawing.Point(124, 491);
+            this.btnArcCode.Location = new System.Drawing.Point(125, 491);
             this.btnArcCode.Name = "btnArcCode";
-            this.btnArcCode.Size = new System.Drawing.Size(115, 25);
+            this.btnArcCode.Size = new System.Drawing.Size(116, 25);
             this.btnArcCode.TabIndex = 4;
             this.btnArcCode.Text = "Arc Code";
             this.btnArcCode.UseVisualStyleBackColor = true;
             this.btnArcCode.Click += new System.EventHandler(this.btnArcCode_Click);
+            // 
+            // pDrawPath
+            // 
+            this.pDrawPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pDrawPath.Location = new System.Drawing.Point(247, 3);
+            this.pDrawPath.Name = "pDrawPath";
+            this.pDrawPath.Size = new System.Drawing.Size(116, 238);
+            this.pDrawPath.TabIndex = 5;
+            this.pDrawPath.Paint += new System.Windows.Forms.PaintEventHandler(this.pDrawPath_Paint);
             // 
             // Result
             // 
@@ -269,5 +280,6 @@
         private System.Windows.Forms.Button btnLineCode;
         private System.Windows.Forms.Button btnClearCode;
         private System.Windows.Forms.Button btnArcCode;
+        private System.Windows.Forms.Panel pDrawPath;
     }
 }

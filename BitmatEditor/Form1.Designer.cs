@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbRow = new System.Windows.Forms.Label();
             this.lbRowValue = new System.Windows.Forms.Label();
             this.lbColumn = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.lbColor = new System.Windows.Forms.Label();
             this.btnColorValue = new System.Windows.Forms.Button();
             this.gbControl = new System.Windows.Forms.GroupBox();
+            this.lblCurrentRatio = new System.Windows.Forms.Label();
             this.nudColCnt = new System.Windows.Forms.NumericUpDown();
             this.btnReset = new System.Windows.Forms.Button();
             this.nudRowCnt = new System.Windows.Forms.NumericUpDown();
@@ -52,7 +54,6 @@
             this.chColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbBrushColor = new System.Windows.Forms.CheckBox();
             this.tlpProperty = new System.Windows.Forms.TableLayoutPanel();
-            this.pDiaplay = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.nBackgroundTextAlpha = new System.Windows.Forms.NumericUpDown();
             this.btnBackgroundTextFont = new System.Windows.Forms.Button();
@@ -65,38 +66,42 @@
             this.txtBackgroundText = new System.Windows.Forms.TextBox();
             this.btnClearBackgroundText = new System.Windows.Forms.Button();
             this.btnSetBackgroundText = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nDotAlpha = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnMakeAbsolute = new System.Windows.Forms.Button();
             this.btnMakeRelative = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbBackgroundImage = new System.Windows.Forms.GroupBox();
             this.nBackgroundAlpha = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblCurrentRatio = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.nDotAlpha = new System.Windows.Forms.NumericUpDown();
+            this.listSelectedDot = new System.Windows.Forms.ListBox();
+            this.pDiaplay = new System.Windows.Forms.Panel();
+            this.pControl = new System.Windows.Forms.Panel();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.gbControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColCnt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRowCnt)).BeginInit();
             this.tlpProperty.SuspendLayout();
-            this.pDiaplay.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundAlpha)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDotAlpha)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.gbBackgroundImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundAlpha)).BeginInit();
+            this.pDiaplay.SuspendLayout();
+            this.pControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbRow
             // 
             this.lbRow.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbRow.AutoSize = true;
-            this.lbRow.Location = new System.Drawing.Point(9, 12);
+            this.lbRow.Location = new System.Drawing.Point(9, 6);
             this.lbRow.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
             this.lbRow.Name = "lbRow";
             this.lbRow.Size = new System.Drawing.Size(38, 12);
@@ -107,7 +112,7 @@
             // 
             this.lbRowValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbRowValue.AutoSize = true;
-            this.lbRowValue.Location = new System.Drawing.Point(92, 12);
+            this.lbRowValue.Location = new System.Drawing.Point(97, 6);
             this.lbRowValue.Margin = new System.Windows.Forms.Padding(4, 0, 3, 0);
             this.lbRowValue.Name = "lbRowValue";
             this.lbRowValue.Size = new System.Drawing.Size(11, 12);
@@ -118,7 +123,7 @@
             // 
             this.lbColumn.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbColumn.AutoSize = true;
-            this.lbColumn.Location = new System.Drawing.Point(9, 36);
+            this.lbColumn.Location = new System.Drawing.Point(9, 30);
             this.lbColumn.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
             this.lbColumn.Name = "lbColumn";
             this.lbColumn.Size = new System.Drawing.Size(32, 12);
@@ -129,7 +134,7 @@
             // 
             this.lbColValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbColValue.AutoSize = true;
-            this.lbColValue.Location = new System.Drawing.Point(92, 36);
+            this.lbColValue.Location = new System.Drawing.Point(97, 30);
             this.lbColValue.Margin = new System.Windows.Forms.Padding(4, 0, 3, 0);
             this.lbColValue.Name = "lbColValue";
             this.lbColValue.Size = new System.Drawing.Size(11, 12);
@@ -140,7 +145,7 @@
             // 
             this.lbColor.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbColor.AutoSize = true;
-            this.lbColor.Location = new System.Drawing.Point(9, 60);
+            this.lbColor.Location = new System.Drawing.Point(9, 54);
             this.lbColor.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
             this.lbColor.Name = "lbColor";
             this.lbColor.Size = new System.Drawing.Size(43, 12);
@@ -150,7 +155,7 @@
             // btnColorValue
             // 
             this.btnColorValue.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnColorValue.Location = new System.Drawing.Point(92, 57);
+            this.btnColorValue.Location = new System.Drawing.Point(97, 51);
             this.btnColorValue.Margin = new System.Windows.Forms.Padding(4, 2, 3, 2);
             this.btnColorValue.Name = "btnColorValue";
             this.btnColorValue.Size = new System.Drawing.Size(73, 18);
@@ -175,6 +180,14 @@
             this.gbControl.TabIndex = 3;
             this.gbControl.TabStop = false;
             this.gbControl.Text = "Size";
+            // 
+            // lblCurrentRatio
+            // 
+            this.lblCurrentRatio.AutoSize = true;
+            this.lblCurrentRatio.Location = new System.Drawing.Point(66, 72);
+            this.lblCurrentRatio.Name = "lblCurrentRatio";
+            this.lblCurrentRatio.Size = new System.Drawing.Size(0, 12);
+            this.lblCurrentRatio.TabIndex = 14;
             // 
             // nudColCnt
             // 
@@ -326,7 +339,7 @@
             this.lvColorList.TabIndex = 6;
             this.lvColorList.UseCompatibleStateImageBehavior = false;
             this.lvColorList.View = System.Windows.Forms.View.Details;
-            this.lvColorList.SelectedIndexChanged += new System.EventHandler(this.lvColorList_SelectedIndexChanged);
+            this.lvColorList.Click += new System.EventHandler(this.lvColorList_Click);
             this.lvColorList.DoubleClick += new System.EventHandler(this.lvColorList_DoubleClick);
             // 
             // chIndex
@@ -356,43 +369,28 @@
             // 
             // tlpProperty
             // 
+            this.tlpProperty.BackColor = System.Drawing.SystemColors.ControlLight;
             this.tlpProperty.ColumnCount = 2;
             this.tlpProperty.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpProperty.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tlpProperty.Controls.Add(this.btnColorValue, 1, 3);
-            this.tlpProperty.Controls.Add(this.lbRow, 0, 1);
-            this.tlpProperty.Controls.Add(this.lbColumn, 0, 2);
-            this.tlpProperty.Controls.Add(this.lbColor, 0, 3);
-            this.tlpProperty.Controls.Add(this.lbColValue, 1, 2);
-            this.tlpProperty.Controls.Add(this.lbRowValue, 1, 1);
+            this.tlpProperty.Controls.Add(this.btnColorValue, 1, 2);
+            this.tlpProperty.Controls.Add(this.lbRow, 0, 0);
+            this.tlpProperty.Controls.Add(this.lbColumn, 0, 1);
+            this.tlpProperty.Controls.Add(this.lbColor, 0, 2);
+            this.tlpProperty.Controls.Add(this.lbColValue, 1, 1);
+            this.tlpProperty.Controls.Add(this.lbRowValue, 1, 0);
             this.tlpProperty.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tlpProperty.Location = new System.Drawing.Point(0, 693);
+            this.tlpProperty.Location = new System.Drawing.Point(0, 545);
             this.tlpProperty.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tlpProperty.Name = "tlpProperty";
-            this.tlpProperty.RowCount = 5;
-            this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpProperty.RowCount = 4;
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tlpProperty.Size = new System.Drawing.Size(222, 86);
+            this.tlpProperty.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpProperty.Size = new System.Drawing.Size(234, 82);
             this.tlpProperty.TabIndex = 0;
-            // 
-            // pDiaplay
-            // 
-            this.pDiaplay.AutoScroll = true;
-            this.pDiaplay.Controls.Add(this.groupBox4);
-            this.pDiaplay.Controls.Add(this.groupBox3);
-            this.pDiaplay.Controls.Add(this.groupBox2);
-            this.pDiaplay.Controls.Add(this.groupBox1);
-            this.pDiaplay.Controls.Add(this.tlpProperty);
-            this.pDiaplay.Controls.Add(this.gbControl);
-            this.pDiaplay.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pDiaplay.Location = new System.Drawing.Point(637, 0);
-            this.pDiaplay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pDiaplay.Name = "pDiaplay";
-            this.pDiaplay.Size = new System.Drawing.Size(239, 578);
-            this.pDiaplay.TabIndex = 5;
             // 
             // groupBox4
             // 
@@ -545,6 +543,60 @@
             this.btnSetBackgroundText.UseVisualStyleBackColor = true;
             this.btnSetBackgroundText.Click += new System.EventHandler(this.btnSetBackgroundText_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.nDotAlpha);
+            this.groupBox1.Controls.Add(this.cbBrushColor);
+            this.groupBox1.Controls.Add(this.lvColorList);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cbFillAreaColor);
+            this.groupBox1.Controls.Add(this.lbSelectedColor);
+            this.groupBox1.Location = new System.Drawing.Point(11, 124);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(199, 238);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Draw";
+            // 
+            // nDotAlpha
+            // 
+            this.nDotAlpha.Location = new System.Drawing.Point(80, 209);
+            this.nDotAlpha.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nDotAlpha.Name = "nDotAlpha";
+            this.nDotAlpha.Size = new System.Drawing.Size(102, 21);
+            this.nDotAlpha.TabIndex = 15;
+            this.nDotAlpha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nDotAlpha.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nDotAlpha.ValueChanged += new System.EventHandler(this.nDotAlpha_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 211);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(45, 12);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Alpha :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 12);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Action :";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnMakeAbsolute);
@@ -578,18 +630,18 @@
             this.btnMakeRelative.UseVisualStyleBackColor = true;
             this.btnMakeRelative.Click += new System.EventHandler(this.btnMakeRelative_Click);
             // 
-            // groupBox2
+            // gbBackgroundImage
             // 
-            this.groupBox2.Controls.Add(this.nBackgroundAlpha);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.btnLoadBackground);
-            this.groupBox2.Controls.Add(this.btnRemoveBackground);
-            this.groupBox2.Location = new System.Drawing.Point(11, 368);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(199, 83);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Background Image";
+            this.gbBackgroundImage.Controls.Add(this.nBackgroundAlpha);
+            this.gbBackgroundImage.Controls.Add(this.label3);
+            this.gbBackgroundImage.Controls.Add(this.btnLoadBackground);
+            this.gbBackgroundImage.Controls.Add(this.btnRemoveBackground);
+            this.gbBackgroundImage.Location = new System.Drawing.Point(11, 368);
+            this.gbBackgroundImage.Name = "gbBackgroundImage";
+            this.gbBackgroundImage.Size = new System.Drawing.Size(199, 83);
+            this.gbBackgroundImage.TabIndex = 14;
+            this.gbBackgroundImage.TabStop = false;
+            this.gbBackgroundImage.Text = "Background Image";
             // 
             // nBackgroundAlpha
             // 
@@ -619,73 +671,56 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Alpha :";
             // 
-            // groupBox1
+            // listSelectedDot
             // 
-            this.groupBox1.Controls.Add(this.nDotAlpha);
-            this.groupBox1.Controls.Add(this.cbBrushColor);
-            this.groupBox1.Controls.Add(this.lvColorList);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cbFillAreaColor);
-            this.groupBox1.Controls.Add(this.lbSelectedColor);
-            this.groupBox1.Location = new System.Drawing.Point(11, 124);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(199, 238);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Draw";
+            this.listSelectedDot.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listSelectedDot.FormattingEnabled = true;
+            this.listSelectedDot.ItemHeight = 12;
+            this.listSelectedDot.Location = new System.Drawing.Point(0, 0);
+            this.listSelectedDot.Name = "listSelectedDot";
+            this.listSelectedDot.Size = new System.Drawing.Size(234, 124);
+            this.listSelectedDot.TabIndex = 18;
+            this.listSelectedDot.Click += new System.EventHandler(this.listSelectedDot_Click);
+            this.listSelectedDot.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listSelectedDot_KeyUp);
             // 
-            // label2
+            // pDiaplay
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 12);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Action :";
+            this.pDiaplay.AutoScroll = true;
+            this.pDiaplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pDiaplay.Controls.Add(this.tlpProperty);
+            this.pDiaplay.Controls.Add(this.pControl);
+            this.pDiaplay.Controls.Add(this.listSelectedDot);
+            this.pDiaplay.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pDiaplay.Location = new System.Drawing.Point(596, 0);
+            this.pDiaplay.Name = "pDiaplay";
+            this.pDiaplay.Size = new System.Drawing.Size(236, 629);
+            this.pDiaplay.TabIndex = 19;
             // 
-            // lblCurrentRatio
+            // pControl
             // 
-            this.lblCurrentRatio.AutoSize = true;
-            this.lblCurrentRatio.Location = new System.Drawing.Point(66, 72);
-            this.lblCurrentRatio.Name = "lblCurrentRatio";
-            this.lblCurrentRatio.Size = new System.Drawing.Size(0, 12);
-            this.lblCurrentRatio.TabIndex = 14;
+            this.pControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pControl.AutoScroll = true;
+            this.pControl.Controls.Add(this.gbControl);
+            this.pControl.Controls.Add(this.groupBox4);
+            this.pControl.Controls.Add(this.groupBox1);
+            this.pControl.Controls.Add(this.groupBox3);
+            this.pControl.Controls.Add(this.gbBackgroundImage);
+            this.pControl.Location = new System.Drawing.Point(0, 130);
+            this.pControl.Name = "pControl";
+            this.pControl.Size = new System.Drawing.Size(234, 410);
+            this.pControl.TabIndex = 17;
             // 
-            // label9
+            // toolTip
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 211);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 12);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "Alpha :";
-            // 
-            // nDotAlpha
-            // 
-            this.nDotAlpha.Location = new System.Drawing.Point(80, 209);
-            this.nDotAlpha.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nDotAlpha.Name = "nDotAlpha";
-            this.nDotAlpha.Size = new System.Drawing.Size(102, 21);
-            this.nDotAlpha.TabIndex = 15;
-            this.nDotAlpha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nDotAlpha.Value = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nDotAlpha.ValueChanged += new System.EventHandler(this.nDotAlpha_ValueChanged);
+            this.toolTip.AutomaticDelay = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 578);
+            this.ClientSize = new System.Drawing.Size(832, 629);
             this.Controls.Add(this.pDiaplay);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
@@ -708,19 +743,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudRowCnt)).EndInit();
             this.tlpProperty.ResumeLayout(false);
             this.tlpProperty.PerformLayout();
-            this.pDiaplay.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundAlpha)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDotAlpha)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.gbBackgroundImage.ResumeLayout(false);
+            this.gbBackgroundImage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundAlpha)).EndInit();
+            this.pDiaplay.ResumeLayout(false);
+            this.pControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -739,7 +775,6 @@
         private System.Windows.Forms.NumericUpDown nudRowCnt;
 		private System.Windows.Forms.CheckBox cbBrushColor;
 		private System.Windows.Forms.TableLayoutPanel tlpProperty;
-		private System.Windows.Forms.Panel pDiaplay;
 		private System.Windows.Forms.Button btnMakeAbsolute;
 		private System.Windows.Forms.ListView lvColorList;
 		private System.Windows.Forms.ColumnHeader chIndex;
@@ -752,7 +787,7 @@
         private System.Windows.Forms.Button btnRemoveBackground;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbBackgroundImage;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnMakeRelative;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -774,6 +809,10 @@
         private System.Windows.Forms.Label lblCurrentRatio;
         private System.Windows.Forms.NumericUpDown nDotAlpha;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox listSelectedDot;
+        private System.Windows.Forms.Panel pDiaplay;
+        private System.Windows.Forms.Panel pControl;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

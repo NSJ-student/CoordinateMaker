@@ -14,6 +14,7 @@ namespace BitmatEditor
 {
     public partial class Form1 : Form
     {
+		public static int RowCount = 1;
 		DotMatrix matrix;
 		Color? SelectedColor;
 		int SelectedIndex;
@@ -26,16 +27,16 @@ namespace BitmatEditor
 		bool bDrag = false;
 		Result resultDialog;
 		List<PointInfo> PointList;
+		int lastDotTicks;
 
         public Form1()
         {
             InitializeComponent();
 			matrix = new DotMatrix(1, 1);
-
-			pDiaplay.Width = 2 * gbControl.Location.X + gbControl.Width;
+			/*
 			this.MinimumSize = new Size(pDiaplay.Width + 200,
-				pDiaplay.Location.Y + pDiaplay.Size.Height + tlpProperty.Size.Height);
-
+                pDiaplay.Location.Y + pDiaplay.Size.Height + pDiaplay.Size.Height);
+			*/
 			SelectedColor = null;
 			SelectedIndex = -1;
             SelectedDot = null;
@@ -52,7 +53,7 @@ namespace BitmatEditor
 				this.ClientSize.Width - pDiaplay.Width - 50,
 				this.ClientSize.Height - 50);
 
-			tlpProperty.Visible = false;
+            //tlpProperty.Visible = false;
 
             AddColorList("Line", Color.FromArgb((int)nDotAlpha.Value, Color.Red));
             AddColorList("Arc", Color.FromArgb((int)nDotAlpha.Value, Color.Blue));
@@ -65,8 +66,9 @@ namespace BitmatEditor
         }
 
         private void nudRowCnt_KeyUp(object sender, KeyEventArgs e)
-		{
-			matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
+        {
+            RowCount = (int)nudRowCnt.Value;
+            matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
 			Invalidate(true);
         }
 
@@ -79,7 +81,8 @@ namespace BitmatEditor
 
         private void nudRowCnt_ValueChanged(object sender, EventArgs e)
 		{
-			matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
+			RowCount = (int)nudRowCnt.Value;
+            matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
 			Invalidate(true);
 			SetDotRatio();
 		}
@@ -93,6 +96,8 @@ namespace BitmatEditor
         private void btnReset_Click(object sender, EventArgs e)
         {
             PointList.Clear();
+            RefreshDotList();
+            RowCount = (int)nudRowCnt.Value;
             matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
             Invalidate(true);
         }
@@ -104,28 +109,46 @@ namespace BitmatEditor
 			float Width = MatrixArea.Width / Col;
             float Height = MatrixArea.Height / Row;
 
-
+			// col&row number
             Font font = new Font(FontFamily.GenericSansSerif, 8);
             Brush tBrush = new SolidBrush(Color.Black);
 			for(int row=0; row<Row; row++)
             {
-                RectangleF areaR = new RectangleF(0, MatrixArea.Y + Height * row, MatrixArea.X, Height);
-                e.Graphics.DrawString((Row-1-row).ToString(), font, tBrush, areaR);
+				string row_num = (Row - 1 - row).ToString();
+                SizeF stringSize = new SizeF();
+                stringSize = e.Graphics.MeasureString(row_num, font);
+                RectangleF areaR = new RectangleF(
+					0, 
+					MatrixArea.Y + Height * row + Height/2 - stringSize.Height/2, 
+					MatrixArea.X, 
+					Height
+				);
+                e.Graphics.DrawString(row_num, font, tBrush, areaR);
             }
             for (int col = 0; col < Col; col++)
             {
-                RectangleF areaC = new RectangleF(MatrixArea.X + Width * col, MatrixArea.Y + MatrixArea.Height, 
-													Width, MatrixArea.Y);
-                e.Graphics.DrawString(col.ToString(), font, tBrush, areaC);
+                string col_num = col.ToString();
+                SizeF stringSize = new SizeF();
+                stringSize = e.Graphics.MeasureString(col_num, font);
+                RectangleF areaC = new RectangleF(
+					MatrixArea.X + Width * col + Width / 2 - stringSize.Width/2, 
+					MatrixArea.Y + MatrixArea.Height, 
+					Width, 
+					MatrixArea.Y
+				);
+                e.Graphics.DrawString(col_num, font, tBrush, areaC);
             }
 
+			// draw background
             if ((backgroundBitmap == null) && (backgroundText == ""))
             {
+				// no background
                 Brush brush = new SolidBrush(Color.White);
                 e.Graphics.FillRectangle(brush, MatrixArea);
             }
 			else if(backgroundText != "")
 			{
+				// show text
 				SizeF stringSize = new SizeF();
 				stringSize = e.Graphics.MeasureString(backgroundText, backgroundTextFont);
 				int leftMargin = (int)(MatrixArea.X + (MatrixArea.Width / 2) - (stringSize.Width / 2));
@@ -135,6 +158,7 @@ namespace BitmatEditor
 			}
 			else
 			{
+				// show image
 				//create a color matrix object  
 				ColorMatrix matrix = new ColorMatrix();
 				//set the opacity  
@@ -147,6 +171,7 @@ namespace BitmatEditor
 								0, 0, backgroundBitmap.Width, backgroundBitmap.Height, GraphicsUnit.Pixel, attributes);
 			}
 
+			// draw dot
 			matrix.Draw(e, MatrixArea);
 		}
 
@@ -209,42 +234,6 @@ namespace BitmatEditor
             }
         }
 
-        private bool IsListColorExist(Color color)
-		{
-			int cnt;
-
-			for (cnt = 0; cnt < lvColorList.Items.Count; cnt++)
-			{
-				ListViewItem item = lvColorList.Items[cnt];
-				if (item.SubItems[2].BackColor == color)
-					return true;
-			}
-
-			return false;
-		}
-		private ListViewItem SearchListViewItem(Color color)
-		{
-			for (int cnt = 0; cnt < lvColorList.Items.Count; cnt++)
-			{
-				ListViewItem item = lvColorList.Items[cnt];
-				if (item.SubItems[2].BackColor == color)
-					return item;
-			}
-
-			return null;
-		}
-		private ListViewItem SearchListViewItem(int index)
-		{
-			for (int cnt = 0; cnt < lvColorList.Items.Count; cnt++)
-			{
-				ListViewItem item = lvColorList.Items[cnt];
-				if (item.SubItems[0].Text.Equals(index.ToString()))
-					return item;
-			}
-
-			return null;
-		}
-
 		private void lvColorList_DoubleClick(object sender, EventArgs e)
 		{
 			ColorDialog cDialog = new ColorDialog();
@@ -285,24 +274,6 @@ namespace BitmatEditor
 			}
 		}
 
-		private bool AddColorList(Color? color)
-		{
-			if (color == null)
-				return false;
-			//if (IsListColorExist((Color)color) == true)
-			//	return false;
-
-			ListViewItem item = new ListViewItem();
-			item.UseItemStyleForSubItems = false;
-			item.SubItems[0] = new ListViewItem.ListViewSubItem(item,
-				lvColorList.Items.Count.ToString());
-			item.SubItems.Add(new ListViewItem.ListViewSubItem(item,
-				(((Color)color).ToArgb() & 0xFFFFFF).ToString("X6")));
-			item.SubItems.Add(new ListViewItem.ListViewSubItem(item, "", (Color)color, (Color)color, null));
-			lvColorList.Items.Add(item);
-			return true;
-		}
-
         private bool AddColorList(string name, Color? color)
         {
             if (color == null)
@@ -327,32 +298,33 @@ namespace BitmatEditor
 			item.SubItems[2].BackColor = color;
 		}
 
-		private void lvColorList_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if(lvColorList.SelectedItems.Count > 0)
-			{
-				ListViewItem item = lvColorList.SelectedItems[0];
-				SelectedColor = item.SubItems[2].BackColor;
-				SelectedIndex = lvColorList.SelectedItems[0].Index;
+        private void lvColorList_Click(object sender, EventArgs e)
+        {
+            if (lvColorList.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lvColorList.SelectedItems[0];
+                SelectedColor = item.SubItems[2].BackColor;
+                SelectedIndex = lvColorList.SelectedItems[0].Index;
                 lbSelectedColor.Text = item.SubItems[0].Text;
-			}
-			else
-			{
-				SelectedColor = null;
-				SelectedIndex = -1;
+				lbSelectedColor.BackColor = (Color)SelectedColor;
+            }
+            else
+            {
+                SelectedColor = null;
+                SelectedIndex = -1;
 
                 lbSelectedColor.Text = "N";
-			}
-		}
+                lbSelectedColor.BackColor = Color.FromArgb(0,0,0,0);
+            }
+        }
 
-		private UInt32 ColorToBit(Color? color)
-		{
-			if (color == null)
-				return 0;
-
-			ListViewItem item = SearchListViewItem((Color)color);
-			return UInt32.Parse(item.SubItems[0].Text);
-		}
+		private void RefreshDotList()
+        {
+			listSelectedDot.DataSource = null;
+            listSelectedDot.DataSource = PointList;
+            listSelectedDot.DisplayMember = "Position";
+			listSelectedDot.SelectedIndex = listSelectedDot.Items.Count - 1;
+        }
 
 		private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -366,7 +338,8 @@ namespace BitmatEditor
 					{
 						selectedItem.SetColor(SelectedColor, SelectedIndex);
 						PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
-						Rectangle rect = new Rectangle(
+						RefreshDotList();
+                        Rectangle rect = new Rectangle(
 							(int)Math.Ceiling(MatrixArea.X),
 							(int)Math.Ceiling(MatrixArea.Y),
 							(int)Math.Ceiling(MatrixArea.Width),
@@ -374,6 +347,8 @@ namespace BitmatEditor
 							);
 						Invalidate(rect, true);
                         bDrag = true;
+
+						lastDotTicks = Environment.TickCount;
                     }
                 }
             }
@@ -398,7 +373,13 @@ namespace BitmatEditor
 							(int)Math.Ceiling(MatrixArea.Height)
 							);
 						Invalidate(rect, true);
-					}
+
+						if((Environment.TickCount - lastDotTicks) > 100)
+                        {
+                            lastDotTicks = Environment.TickCount;
+                            RefreshDotList();
+                        }
+                    }
 				}
 			}
 		}
@@ -424,8 +405,10 @@ namespace BitmatEditor
 								(int)Math.Ceiling(MatrixArea.Height)
 								);
 							Invalidate(rect, true);
-						}
-					}
+                        }
+
+                        RefreshDotList();
+                    }
 				}
 				return;
 			}
@@ -452,6 +435,7 @@ namespace BitmatEditor
 						{
 							SelectedDot.SetColor(SelectedColor, SelectedIndex);
                             PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
+                            RefreshDotList();
                         }
 						else if (cbFillAreaColor.Checked)
 						{
@@ -459,7 +443,7 @@ namespace BitmatEditor
 						}
 					}
 
-					tlpProperty.Visible = true;
+                    //tlpProperty.Visible = true;
 					lbRowValue.Text = selectedItem.Row.ToString();
 					lbColValue.Text = selectedItem.Column.ToString();
 					if (selectedItem.BackColor != null)
@@ -482,10 +466,11 @@ namespace BitmatEditor
 							SelectedDot.SetColor(null, -1);
                             PointList.RemoveAll(
 								x => (x.X == selectedItem.Column) && (x.Y == selectedItem.Row));
+                            RefreshDotList();
                         }
                         SelectedDot = null;
 					}
-					tlpProperty.Visible = false;
+                    //tlpProperty.Visible = false;
 				}
 
 				Rectangle rect = new Rectangle(
@@ -502,7 +487,7 @@ namespace BitmatEditor
 				{
 					SelectedDot.Selected = false;
 					SelectedDot = null;
-					tlpProperty.Visible = false;
+                    //tlpProperty.Visible = false;
 
 					Rectangle rect = new Rectangle(
 						(int)Math.Ceiling(MatrixArea.X),
@@ -524,10 +509,20 @@ namespace BitmatEditor
 		}
 
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
-		{
-		}
+        {
+			if(e.KeyCode == Keys.F1)
+            {
+                var pos = this.PointToClient(Cursor.Position);
 
-		private void Form1_KeyDown(object sender, KeyEventArgs e)
+                Dot item = matrix.SelectDot(MatrixArea, pos.X, pos.Y);
+                if (item != null)
+                {
+                    toolTip.SetToolTip(this, string.Format("{0}, {1}", item.Column, RowCount - 1 - item.Row));
+                }
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
 		}
 
@@ -539,8 +534,10 @@ namespace BitmatEditor
 
 			if(result == DialogResult.OK)
             {
-                backgroundBitmap = new Bitmap(dialog.FileName);
-				this.Invalidate();
+                Bitmap bitmap = new Bitmap(dialog.FileName);
+                backgroundBitmap = (Bitmap)bitmap.Clone();
+                bitmap.Dispose();
+                this.Invalidate();
             }
         }
 
@@ -565,13 +562,18 @@ namespace BitmatEditor
 
         private void btnSetBackgroundText_Click(object sender, EventArgs e)
         {
-			backgroundText = txtBackgroundText.Text;
-			Invalidate();
+			if(txtBackgroundText.Text != "")
+            {
+                gbBackgroundImage.Enabled = false;
+                backgroundText = txtBackgroundText.Text;
+                Invalidate();
+            }
 		}
 
         private void btnClearBackgroundText_Click(object sender, EventArgs e)
         {
-			backgroundText = "";
+            gbBackgroundImage.Enabled = true;
+            backgroundText = "";
 			Invalidate();
 		}
 
@@ -626,11 +628,61 @@ namespace BitmatEditor
 				ListViewItemChangeColor(item, Color.FromArgb((int)nDotAlpha.Value, color.R, color.G, color.B));
 			}
 
-			SelectedColor = null;
-			SelectedIndex = -1;
-			lbSelectedColor.Text = "N";
-			Invalidate();
+			if(SelectedColor != null)
+            {
+                SelectedColor = null;
+                SelectedIndex = -1;
+                lbSelectedColor.Text = "N";
+                lbSelectedColor.BackColor = Color.FromArgb(0, 0, 0, 0);
+				cbBrushColor.Checked = false;
+				cbFillAreaColor.Checked = false;
+            }
+
+            Invalidate();
 		}
+
+        private void listSelectedDot_Click(object sender, EventArgs e)
+        {
+            ListBox lb = sender as ListBox;
+            if (lb != null)
+            {
+                if (listSelectedDot.SelectedItem == null)
+                {
+                    return;
+                }
+
+                PointInfo info = listSelectedDot.SelectedItem as PointInfo;
+
+                matrix.SelectDot(info.Y, info.X);
+                Invalidate();
+            }
+        }
+
+        private void listSelectedDot_KeyUp(object sender, KeyEventArgs e)
+        {
+			if(e.KeyCode == Keys.Delete)
+            {
+                if (listSelectedDot.SelectedItem == null)
+                {
+                    return;
+                }
+
+                PointInfo info = listSelectedDot.SelectedItem as PointInfo;
+
+				Dot selected = matrix.GetDot(info.Y, info.X);
+				if(selected == null)
+				{
+					return;
+				}
+
+                selected.Selected = false;
+                selected.SetColor(null, -1);
+                PointList.Remove(info);
+                RefreshDotList();
+				Invalidate();
+            }
+        }
+
     }
 
     public class PointInfo
@@ -638,6 +690,13 @@ namespace BitmatEditor
         public int X { get; }
         public int Y { get; }
         public int Type { get; }
+		public string Position
+		{
+			get
+			{
+				return string.Format("{0},{1}", X, Form1.RowCount - 1 - Y);
+			}
+		}
         public PointInfo(int x, int y, int t)
 		{
 			X = x;

@@ -85,16 +85,17 @@ namespace BitmatEditor
 				(area.Y + area.Height * Row),
 				area.Width, 
 				area.Height );
-			Color color = (FillColor != null) ? (Color)FillColor : Color.FromArgb(0,0,0,0);
 
 			if (bFocus)
-			{
-				HatchBrush brush = new HatchBrush(HatchStyle.DottedDiamond, Color.Black, color);
+            {
+                Color color = (FillColor != null) ? Color.LightCoral : Color.LightGreen;
+                HatchBrush brush = new HatchBrush(HatchStyle.DottedDiamond, Color.Black, color);
 				e.Graphics.FillRectangle(brush, rect);
 			}
 			else
-			{
-				Brush brush = new SolidBrush(color);
+            {
+                Color color = (FillColor != null) ? (Color)FillColor : Color.FromArgb(0, 0, 0, 0);
+                Brush brush = new SolidBrush(color);
 				e.Graphics.FillRectangle(brush, rect);
 			}
 
@@ -171,7 +172,46 @@ namespace BitmatEditor
 			return null;
 		}
 
-		public bool IsColorExists(Color color)
+        public void SelectDot(int row, int col)
+        {
+			if(row < 0 || col < 0)
+			{
+				return;
+			}
+			if (row > Row - 1) { return; }
+            if (col > Col - 1) { return; }
+
+            for (int r_cnt = 0; r_cnt < Row; r_cnt++)
+            {
+                for (int c_cnt = 0; c_cnt < Col; c_cnt++)
+                {
+                    List<Dot> item = DotMat[r_cnt];
+					if ((c_cnt == col) && (r_cnt == row))
+					{
+						item[c_cnt].ToggleFocus();
+					}
+					else
+                    {
+                        item[c_cnt].Selected = false;
+                    }
+                }
+            }
+        }
+
+        public Dot GetDot(int row, int col)
+        {
+            if (row < 0 || col < 0)
+            {
+                return null;
+            }
+            if (row > Row-1) { return null; }
+
+            List<Dot> item = DotMat[row];
+            if (col > Col-1) { return null; }
+            return item[col];
+        }
+
+        public bool IsColorExists(Color color)
 		{
 			int r_cnt = 0;
 			int c_cnt = 0;
