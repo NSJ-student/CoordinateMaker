@@ -44,6 +44,7 @@
             this.btnClearCode = new System.Windows.Forms.Button();
             this.btnArcCode = new System.Windows.Forms.Button();
             this.pDrawPath = new System.Windows.Forms.Panel();
+            this.txtVarSuffix = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -113,16 +114,18 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.Controls.Add(this.dgvResult, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.rtbGenCode, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnLineCode, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnClearCode, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnArcCode, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.pDrawPath, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnLineCode, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnClearCode, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnArcCode, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.pDrawPath, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtVarSuffix, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -141,12 +144,12 @@
             this.cPosX,
             this.cPosY,
             this.cType});
-            this.tableLayoutPanel1.SetColumnSpan(this.dgvResult, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.dgvResult, 3);
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.RowTemplate.Height = 23;
-            this.dgvResult.Size = new System.Drawing.Size(238, 238);
+            this.dgvResult.Size = new System.Drawing.Size(254, 238);
             this.dgvResult.TabIndex = 0;
             // 
             // cIndex
@@ -187,7 +190,7 @@
             // 
             // rtbGenCode
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.rtbGenCode, 3);
+            this.tableLayoutPanel1.SetColumnSpan(this.rtbGenCode, 4);
             this.rtbGenCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbGenCode.Location = new System.Drawing.Point(3, 247);
             this.rtbGenCode.Name = "rtbGenCode";
@@ -199,9 +202,9 @@
             // btnLineCode
             // 
             this.btnLineCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLineCode.Location = new System.Drawing.Point(3, 491);
+            this.btnLineCode.Location = new System.Drawing.Point(53, 491);
             this.btnLineCode.Name = "btnLineCode";
-            this.btnLineCode.Size = new System.Drawing.Size(116, 25);
+            this.btnLineCode.Size = new System.Drawing.Size(99, 25);
             this.btnLineCode.TabIndex = 2;
             this.btnLineCode.Text = "Line Code";
             this.btnLineCode.UseVisualStyleBackColor = true;
@@ -210,9 +213,9 @@
             // btnClearCode
             // 
             this.btnClearCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClearCode.Location = new System.Drawing.Point(247, 491);
+            this.btnClearCode.Location = new System.Drawing.Point(263, 491);
             this.btnClearCode.Name = "btnClearCode";
-            this.btnClearCode.Size = new System.Drawing.Size(116, 25);
+            this.btnClearCode.Size = new System.Drawing.Size(100, 25);
             this.btnClearCode.TabIndex = 3;
             this.btnClearCode.Text = "Clear Code";
             this.btnClearCode.UseVisualStyleBackColor = true;
@@ -221,9 +224,9 @@
             // btnArcCode
             // 
             this.btnArcCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnArcCode.Location = new System.Drawing.Point(125, 491);
+            this.btnArcCode.Location = new System.Drawing.Point(158, 491);
             this.btnArcCode.Name = "btnArcCode";
-            this.btnArcCode.Size = new System.Drawing.Size(116, 25);
+            this.btnArcCode.Size = new System.Drawing.Size(99, 25);
             this.btnArcCode.TabIndex = 4;
             this.btnArcCode.Text = "Arc Code";
             this.btnArcCode.UseVisualStyleBackColor = true;
@@ -232,11 +235,19 @@
             // pDrawPath
             // 
             this.pDrawPath.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pDrawPath.Location = new System.Drawing.Point(247, 3);
+            this.pDrawPath.Location = new System.Drawing.Point(263, 3);
             this.pDrawPath.Name = "pDrawPath";
-            this.pDrawPath.Size = new System.Drawing.Size(116, 238);
+            this.pDrawPath.Size = new System.Drawing.Size(100, 238);
             this.pDrawPath.TabIndex = 5;
             this.pDrawPath.Paint += new System.Windows.Forms.PaintEventHandler(this.pDrawPath_Paint);
+            // 
+            // txtVarSuffix
+            // 
+            this.txtVarSuffix.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtVarSuffix.Location = new System.Drawing.Point(3, 491);
+            this.txtVarSuffix.Name = "txtVarSuffix";
+            this.txtVarSuffix.Size = new System.Drawing.Size(44, 21);
+            this.txtVarSuffix.TabIndex = 6;
             // 
             // Result
             // 
@@ -258,6 +269,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
             this.ResumeLayout(false);
 
@@ -281,5 +293,6 @@
         private System.Windows.Forms.Button btnClearCode;
         private System.Windows.Forms.Button btnArcCode;
         private System.Windows.Forms.Panel pDrawPath;
+        private System.Windows.Forms.TextBox txtVarSuffix;
     }
 }

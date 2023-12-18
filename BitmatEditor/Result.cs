@@ -121,6 +121,8 @@ namespace BitmatEditor
 
 			rtbGenCode.Clear();
 
+			rtbGenCode.AppendText(string.Format("GraphicsPath path{0} = new GraphicsPath();\n", txtVarSuffix.Text));
+			
 			for (int row = 0; row < selectedCnt-1; row++)
 			{
 				string X1 = (string)dgvResult.SelectedRows[row].Cells[1].Value;
@@ -128,10 +130,11 @@ namespace BitmatEditor
 				string X2 = (string)dgvResult.SelectedRows[row+1].Cells[1].Value;
 				string Y2 = (string)dgvResult.SelectedRows[row+1].Cells[2].Value;
 
-				rtbGenCode.AppendText(string.Format("graphicPath.AddLine(offsetX + ({0} * width), offsetY + ({1} * height),\n", X1, Y1));
-				rtbGenCode.AppendText(string.Format("\t\t\t\t\toffsetX + ({0} * width), offsetY + ({1} * height));\n", X2, Y2));
+				rtbGenCode.AppendText(string.Format("path{0}.AddLine(offsetX + ({1} * width), offsetY + ({2} * height),\n", txtVarSuffix.Text, X1, Y1));
+				rtbGenCode.AppendText(string.Format("             offsetX + ({0} * width), offsetY + ({1} * height));\n", X2, Y2));
 			}
 
+			rtbGenCode.AppendText(string.Format("graphicPath.Add(path{0});\n", txtVarSuffix.Text));
 			DrawLine();
         }
 
@@ -144,7 +147,7 @@ namespace BitmatEditor
 			}
 
 			rtbGenCode.Clear();
-			rtbGenCode.AppendText("var pointss = new PointF[]\n{\n");
+			rtbGenCode.AppendText(string.Format("var pointss{0} = new PointF[]\n{\n", txtVarSuffix.Text));
 
 			for (int row = 0; row < selectedCnt; row++)
 			{
