@@ -151,7 +151,7 @@ namespace BitmatEditor
 				// show text
 				SizeF stringSize = new SizeF();
 				stringSize = e.Graphics.MeasureString(backgroundText, backgroundTextFont);
-				int leftMargin = (int)(MatrixArea.X + (MatrixArea.Width / 2) - (stringSize.Width / 2));
+				int leftMargin = (int)(MatrixArea.X + (MatrixArea.Width / 2) - (stringSize.Width / 2) - (int)nBackgroundTextOffsetX.Value);
 				int topMargin = (int)(MatrixArea.Y + (MatrixArea.Height / 2) - (int)nBackgroundTextOffsetY.Value);
 				Brush bBrush = new SolidBrush(Color.FromArgb((int)nBackgroundTextAlpha.Value, 0, 0, 0));
 				e.Graphics.DrawString(backgroundText, backgroundTextFont, bBrush, leftMargin, topMargin);
@@ -605,7 +605,12 @@ namespace BitmatEditor
 			Invalidate();
 		}
 
-        private void nBackgroundTextAlpha_ValueChanged(object sender, EventArgs e)
+		private void nBackgroundTextOffsetX_ValueChanged(object sender, EventArgs e)
+		{
+			Invalidate();
+		}
+
+		private void nBackgroundTextAlpha_ValueChanged(object sender, EventArgs e)
 		{
 			Invalidate();
 		}
