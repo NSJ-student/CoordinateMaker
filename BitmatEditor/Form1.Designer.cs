@@ -58,8 +58,8 @@
             this.nBackgroundTextAlpha = new System.Windows.Forms.NumericUpDown();
             this.btnBackgroundTextFont = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.nBackgroundTextOffsetX = new System.Windows.Forms.NumericUpDown();
-            this.nBackgroundTextOffsetY = new System.Windows.Forms.NumericUpDown();
+            this.nBackgroundOffsetX = new System.Windows.Forms.NumericUpDown();
+            this.nBackgroundOffsetY = new System.Windows.Forms.NumericUpDown();
             this.nBackgroundTextSize = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -88,8 +88,8 @@
             this.tlpProperty.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDotAlpha)).BeginInit();
@@ -171,15 +171,19 @@
             this.gbControl.Controls.Add(this.lblCurrentRatio);
             this.gbControl.Controls.Add(this.nudColCnt);
             this.gbControl.Controls.Add(this.btnReset);
+            this.gbControl.Controls.Add(this.nBackgroundOffsetX);
             this.gbControl.Controls.Add(this.nudRowCnt);
             this.gbControl.Controls.Add(this.label8);
+            this.gbControl.Controls.Add(this.nBackgroundOffsetY);
             this.gbControl.Controls.Add(this.lbColCnt);
             this.gbControl.Controls.Add(this.lbRowCnt);
+            this.gbControl.Controls.Add(this.label6);
+            this.gbControl.Controls.Add(this.label10);
             this.gbControl.Location = new System.Drawing.Point(11, 11);
             this.gbControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbControl.Name = "gbControl";
             this.gbControl.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbControl.Size = new System.Drawing.Size(199, 108);
+            this.gbControl.Size = new System.Drawing.Size(199, 157);
             this.gbControl.TabIndex = 3;
             this.gbControl.TabStop = false;
             this.gbControl.Text = "Size";
@@ -400,19 +404,15 @@
             this.groupBox4.Controls.Add(this.nBackgroundTextAlpha);
             this.groupBox4.Controls.Add(this.btnBackgroundTextFont);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.nBackgroundTextOffsetX);
-            this.groupBox4.Controls.Add(this.nBackgroundTextOffsetY);
             this.groupBox4.Controls.Add(this.nBackgroundTextSize);
-            this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.txtBackgroundText);
             this.groupBox4.Controls.Add(this.btnClearBackgroundText);
             this.groupBox4.Controls.Add(this.btnSetBackgroundText);
-            this.groupBox4.Location = new System.Drawing.Point(11, 456);
+            this.groupBox4.Location = new System.Drawing.Point(11, 513);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(199, 200);
+            this.groupBox4.Size = new System.Drawing.Size(199, 140);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Background Text";
@@ -456,43 +456,43 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Alpha :";
             // 
-            // nBackgroundTextOffsetX
+            // nBackgroundOffsetX
             // 
-            this.nBackgroundTextOffsetX.Location = new System.Drawing.Point(68, 133);
-            this.nBackgroundTextOffsetX.Maximum = new decimal(new int[] {
+            this.nBackgroundOffsetX.Location = new System.Drawing.Point(67, 126);
+            this.nBackgroundOffsetX.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nBackgroundTextOffsetX.Minimum = new decimal(new int[] {
+            this.nBackgroundOffsetX.Minimum = new decimal(new int[] {
             100000,
             0,
             0,
             -2147483648});
-            this.nBackgroundTextOffsetX.Name = "nBackgroundTextOffsetX";
-            this.nBackgroundTextOffsetX.Size = new System.Drawing.Size(114, 21);
-            this.nBackgroundTextOffsetX.TabIndex = 4;
-            this.nBackgroundTextOffsetX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nBackgroundTextOffsetX.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetX_ValueChanged);
+            this.nBackgroundOffsetX.Name = "nBackgroundOffsetX";
+            this.nBackgroundOffsetX.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundOffsetX.TabIndex = 4;
+            this.nBackgroundOffsetX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundOffsetX.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetX_ValueChanged);
             // 
-            // nBackgroundTextOffsetY
+            // nBackgroundOffsetY
             // 
-            this.nBackgroundTextOffsetY.Location = new System.Drawing.Point(69, 104);
-            this.nBackgroundTextOffsetY.Maximum = new decimal(new int[] {
+            this.nBackgroundOffsetY.Location = new System.Drawing.Point(68, 97);
+            this.nBackgroundOffsetY.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
-            this.nBackgroundTextOffsetY.Minimum = new decimal(new int[] {
+            this.nBackgroundOffsetY.Minimum = new decimal(new int[] {
             100000,
             0,
             0,
             -2147483648});
-            this.nBackgroundTextOffsetY.Name = "nBackgroundTextOffsetY";
-            this.nBackgroundTextOffsetY.Size = new System.Drawing.Size(114, 21);
-            this.nBackgroundTextOffsetY.TabIndex = 4;
-            this.nBackgroundTextOffsetY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nBackgroundTextOffsetY.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetY_ValueChanged);
+            this.nBackgroundOffsetY.Name = "nBackgroundOffsetY";
+            this.nBackgroundOffsetY.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundOffsetY.TabIndex = 4;
+            this.nBackgroundOffsetY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundOffsetY.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetY_ValueChanged);
             // 
             // nBackgroundTextSize
             // 
@@ -521,7 +521,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 135);
+            this.label10.Location = new System.Drawing.Point(11, 128);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(57, 12);
             this.label10.TabIndex = 3;
@@ -530,7 +530,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 106);
+            this.label6.Location = new System.Drawing.Point(12, 99);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(57, 12);
             this.label6.TabIndex = 3;
@@ -556,14 +556,14 @@
             // 
             // txtBackgroundText
             // 
-            this.txtBackgroundText.Location = new System.Drawing.Point(15, 164);
+            this.txtBackgroundText.Location = new System.Drawing.Point(14, 107);
             this.txtBackgroundText.Name = "txtBackgroundText";
             this.txtBackgroundText.Size = new System.Drawing.Size(67, 21);
             this.txtBackgroundText.TabIndex = 2;
             // 
             // btnClearBackgroundText
             // 
-            this.btnClearBackgroundText.Location = new System.Drawing.Point(139, 160);
+            this.btnClearBackgroundText.Location = new System.Drawing.Point(138, 103);
             this.btnClearBackgroundText.Name = "btnClearBackgroundText";
             this.btnClearBackgroundText.Size = new System.Drawing.Size(45, 26);
             this.btnClearBackgroundText.TabIndex = 1;
@@ -573,7 +573,7 @@
             // 
             // btnSetBackgroundText
             // 
-            this.btnSetBackgroundText.Location = new System.Drawing.Point(88, 160);
+            this.btnSetBackgroundText.Location = new System.Drawing.Point(87, 103);
             this.btnSetBackgroundText.Name = "btnSetBackgroundText";
             this.btnSetBackgroundText.Size = new System.Drawing.Size(45, 26);
             this.btnSetBackgroundText.TabIndex = 0;
@@ -591,7 +591,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cbFillAreaColor);
             this.groupBox1.Controls.Add(this.lbSelectedColor);
-            this.groupBox1.Location = new System.Drawing.Point(11, 124);
+            this.groupBox1.Location = new System.Drawing.Point(11, 176);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(199, 238);
             this.groupBox1.TabIndex = 5;
@@ -639,7 +639,7 @@
             // 
             this.groupBox3.Controls.Add(this.btnMakeAbsolute);
             this.groupBox3.Controls.Add(this.btnMakeRelative);
-            this.groupBox3.Location = new System.Drawing.Point(11, 662);
+            this.groupBox3.Location = new System.Drawing.Point(11, 661);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(199, 62);
             this.groupBox3.TabIndex = 15;
@@ -674,7 +674,7 @@
             this.gbBackgroundImage.Controls.Add(this.label3);
             this.gbBackgroundImage.Controls.Add(this.btnLoadBackground);
             this.gbBackgroundImage.Controls.Add(this.btnRemoveBackground);
-            this.gbBackgroundImage.Location = new System.Drawing.Point(11, 368);
+            this.gbBackgroundImage.Location = new System.Drawing.Point(11, 422);
             this.gbBackgroundImage.Name = "gbBackgroundImage";
             this.gbBackgroundImage.Size = new System.Drawing.Size(199, 83);
             this.gbBackgroundImage.TabIndex = 14;
@@ -784,8 +784,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextOffsetY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -840,7 +840,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown nBackgroundTextSize;
         private System.Windows.Forms.Button btnBackgroundTextFont;
-        private System.Windows.Forms.NumericUpDown nBackgroundTextOffsetY;
+        private System.Windows.Forms.NumericUpDown nBackgroundOffsetY;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nBackgroundTextAlpha;
         private System.Windows.Forms.Label label7;
@@ -852,7 +852,7 @@
         private System.Windows.Forms.Panel pDiaplay;
         private System.Windows.Forms.Panel pControl;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.NumericUpDown nBackgroundTextOffsetX;
+        private System.Windows.Forms.NumericUpDown nBackgroundOffsetX;
         private System.Windows.Forms.Label label10;
     }
 }

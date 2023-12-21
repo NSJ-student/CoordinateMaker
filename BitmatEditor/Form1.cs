@@ -24,6 +24,7 @@ namespace BitmatEditor
 		Font backgroundTextFont;
         Dot SelectedDot;
 		Dot MouseDownDot;
+		Dot LastDot;
 		bool bDrag = false;
 		Result resultDialog;
 		List<PointInfo> PointList;
@@ -41,6 +42,7 @@ namespace BitmatEditor
 			SelectedIndex = -1;
             SelectedDot = null;
 			MouseDownDot = null;
+			LastDot = null;
 			backgroundBitmap = null;
 			backgroundText = "";
 			backgroundTextFont = btnBackgroundTextFont.Font;
@@ -99,7 +101,10 @@ namespace BitmatEditor
             RefreshDotList();
             RowCount = (int)nudRowCnt.Value;
             matrix = new DotMatrix((int)nudRowCnt.Value, (int)nudColCnt.Value);
-            Invalidate(true);
+			LastDot = null;
+			MouseDownDot = null;
+			SelectedDot = null;
+			Invalidate(true);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -151,8 +156,8 @@ namespace BitmatEditor
 				// show text
 				SizeF stringSize = new SizeF();
 				stringSize = e.Graphics.MeasureString(backgroundText, backgroundTextFont);
-				int leftMargin = (int)(MatrixArea.X + (MatrixArea.Width / 2) - (stringSize.Width / 2) - (int)nBackgroundTextOffsetX.Value);
-				int topMargin = (int)(MatrixArea.Y + (MatrixArea.Height / 2) - (int)nBackgroundTextOffsetY.Value);
+				int leftMargin = (int)(MatrixArea.X + (MatrixArea.Width / 2) - (stringSize.Width / 2) + (int)nBackgroundOffsetX.Value);
+				int topMargin = (int)(MatrixArea.Y + (MatrixArea.Height / 2) + (int)nBackgroundOffsetY.Value);
 				Brush bBrush = new SolidBrush(Color.FromArgb((int)nBackgroundTextAlpha.Value, 0, 0, 0));
 				e.Graphics.DrawString(backgroundText, backgroundTextFont, bBrush, leftMargin, topMargin);
 			}
@@ -167,7 +172,11 @@ namespace BitmatEditor
 				ImageAttributes attributes = new ImageAttributes();
 				//set the color(opacity) of the image  
 				attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-				e.Graphics.DrawImage(backgroundBitmap, new Rectangle((int)MatrixArea.X, (int)MatrixArea.Y, (int)MatrixArea.Width, (int)MatrixArea.Height), 
+				e.Graphics.DrawImage(backgroundBitmap, new Rectangle(
+								(int)MatrixArea.X + (int)nBackgroundOffsetX.Value, 
+								(int)MatrixArea.Y + (int)nBackgroundOffsetY.Value, 
+								(int)MatrixArea.Width, 
+								(int)MatrixArea.Height), 
 								0, 0, backgroundBitmap.Width, backgroundBitmap.Height, GraphicsUnit.Pixel, attributes);
 			}
 
@@ -337,20 +346,24 @@ namespace BitmatEditor
 					if (selectedItem.BackColor != SelectedColor)
 					{
 						selectedItem.SetColor(SelectedColor, SelectedIndex);
-						PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
-						RefreshDotList();
-                        Rectangle rect = new Rectangle(
+						Rectangle rect = new Rectangle(
 							(int)Math.Ceiling(MatrixArea.X),
 							(int)Math.Ceiling(MatrixArea.Y),
 							(int)Math.Ceiling(MatrixArea.Width),
 							(int)Math.Ceiling(MatrixArea.Height)
 							);
 						Invalidate(rect, true);
-                        bDrag = true;
 
+					}
+					if (LastDot != selectedItem)
+					{
+						LastDot = selectedItem;
+						PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
+						RefreshDotList();
 						lastDotTicks = Environment.TickCount;
-                    }
-                }
+					}
+					bDrag = true;
+				}
             }
         }
 
@@ -364,8 +377,6 @@ namespace BitmatEditor
 					if(selectedItem.BackColor != SelectedColor)
 					{
 						selectedItem.SetColor(SelectedColor, SelectedIndex);
-                        PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
-                        bDrag = true;
 						Rectangle rect = new Rectangle(
 							(int)Math.Ceiling(MatrixArea.X),
 							(int)Math.Ceiling(MatrixArea.Y),
@@ -374,120 +385,33 @@ namespace BitmatEditor
 							);
 						Invalidate(rect, true);
 
-						if((Environment.TickCount - lastDotTicks) > 100)
-                        {
-                            lastDotTicks = Environment.TickCount;
-                            RefreshDotList();
-                        }
                     }
+
+					if (LastDot != selectedItem)
+					{
+						LastDot = selectedItem;
+						PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
+
+						if ((Environment.TickCount - lastDotTicks) > 100)
+						{
+							lastDotTicks = Environment.TickCount;
+							RefreshDotList();
+						}
+					}
 				}
 			}
 		}
 		
 		private void Form1_MouseUp(object sender, MouseEventArgs e)
 		{
-			if(bDrag)
-			{
-				bDrag = false;
-				Dot item = matrix.SelectDot(MatrixArea, e.X, e.Y);
-				if (item != null)
-				{
-					if (cbBrushColor.Checked)
-					{
-						if (item.BackColor != SelectedColor)
-						{
-							item.SetColor(SelectedColor, SelectedIndex);
-                            PointList.Add(new PointInfo(item.Column, item.Row, SelectedIndex));
-                            Rectangle rect = new Rectangle(
-								(int)Math.Ceiling(MatrixArea.X),
-								(int)Math.Ceiling(MatrixArea.Y),
-								(int)Math.Ceiling(MatrixArea.Width),
-								(int)Math.Ceiling(MatrixArea.Height)
-								);
-							Invalidate(rect, true);
-                        }
-
-                        RefreshDotList();
-                    }
-				}
-				return;
-			}
-
-
 			Dot selectedItem = matrix.SelectDot(MatrixArea, e.X, e.Y);
-			if (selectedItem != null)
-			{
-				if(selectedItem != MouseDownDot)
-				{
-					return;
-				}
-				selectedItem.ToggleFocus();
-
-				if (selectedItem.Selected)
-				{
-					if (SelectedDot != null)
-						SelectedDot.Selected = false;
-					SelectedDot = selectedItem;
-
-					if (SelectedColor != null)
-					{
-						if (cbBrushColor.Checked)
-						{
-							SelectedDot.SetColor(SelectedColor, SelectedIndex);
-                            PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
-                            RefreshDotList();
-                        }
-						else if (cbFillAreaColor.Checked)
-						{
-							matrix.FillAreaColor(SelectedDot, SelectedDot.BackColor, SelectedColor);
-						}
-					}
-
-                    //tlpProperty.Visible = true;
-					lbRowValue.Text = selectedItem.Row.ToString();
-					lbColValue.Text = selectedItem.Column.ToString();
-					if (selectedItem.BackColor != null)
-					{
-						btnColorValue.BackColor = (Color)selectedItem.BackColor;
-						btnColorValue.Text = (((Color)selectedItem.BackColor).ToArgb() & 0xFFFFFF).ToString("X");
-					}
-					else
-					{
-						btnColorValue.BackColor = (Color)SystemColors.Control;
-						btnColorValue.Text = "";
-					}
-				}
-				else
-				{
-					if (SelectedDot != null)
-					{
-						if (cbBrushColor.Checked)
-						{
-							SelectedDot.SetColor(null, -1);
-                            PointList.RemoveAll(
-								x => (x.X == selectedItem.Column) && (x.Y == selectedItem.Row));
-                            RefreshDotList();
-                        }
-                        SelectedDot = null;
-					}
-                    //tlpProperty.Visible = false;
-				}
-
-				Rectangle rect = new Rectangle(
-					(int)Math.Ceiling(MatrixArea.X),
-					(int)Math.Ceiling(MatrixArea.Y),
-					(int)Math.Ceiling(MatrixArea.Width),
-					(int)Math.Ceiling(MatrixArea.Height)
-					);
-				Invalidate(rect, true);
-			}
-			else
+			if(selectedItem == null)
 			{
 				if (SelectedDot != null)
 				{
 					SelectedDot.Selected = false;
 					SelectedDot = null;
-                    //tlpProperty.Visible = false;
+					//tlpProperty.Visible = false;
 
 					Rectangle rect = new Rectangle(
 						(int)Math.Ceiling(MatrixArea.X),
@@ -497,7 +421,94 @@ namespace BitmatEditor
 						);
 					Invalidate(rect, true);
 				}
+				return;
 			}
+
+			if (bDrag)
+			{
+				bDrag = false;
+
+				if (cbBrushColor.Checked)
+				{
+					if (selectedItem.BackColor != SelectedColor)
+					{
+						selectedItem.SetColor(SelectedColor, SelectedIndex);
+						Rectangle rect2 = new Rectangle(
+							(int)Math.Ceiling(MatrixArea.X),
+							(int)Math.Ceiling(MatrixArea.Y),
+							(int)Math.Ceiling(MatrixArea.Width),
+							(int)Math.Ceiling(MatrixArea.Height)
+							);
+						Invalidate(rect2, true);
+					}
+
+					if (LastDot != selectedItem)
+					{
+						LastDot = selectedItem;
+						PointList.Add(new PointInfo(selectedItem.Column, selectedItem.Row, SelectedIndex));
+					}
+					RefreshDotList();
+				}
+				return;
+			}
+
+			if (selectedItem != MouseDownDot)
+			{
+				return;
+			}
+			selectedItem.ToggleFocus();
+
+			if (selectedItem.Selected)
+			{
+				if (SelectedDot != null)
+					SelectedDot.Selected = false;
+				SelectedDot = selectedItem;
+
+				if (SelectedColor != null)
+				{
+					if (cbFillAreaColor.Checked)
+					{
+						matrix.FillAreaColor(SelectedDot, SelectedDot.BackColor, SelectedColor);
+					}
+				}
+
+				//tlpProperty.Visible = true;
+				lbRowValue.Text = selectedItem.Row.ToString();
+				lbColValue.Text = selectedItem.Column.ToString();
+				if (selectedItem.BackColor != null)
+				{
+					btnColorValue.BackColor = (Color)selectedItem.BackColor;
+					btnColorValue.Text = (((Color)selectedItem.BackColor).ToArgb() & 0xFFFFFF).ToString("X");
+				}
+				else
+				{
+					btnColorValue.BackColor = (Color)SystemColors.Control;
+					btnColorValue.Text = "";
+				}
+			}
+			else
+			{
+				if (SelectedDot != null)
+				{
+					if (cbBrushColor.Checked)
+					{
+						SelectedDot.SetColor(null, -1);
+						PointList.RemoveAll(
+							x => (x.X == selectedItem.Column) && (x.Y == selectedItem.Row));
+						RefreshDotList();
+					}
+					SelectedDot = null;
+				}
+				//tlpProperty.Visible = false;
+			}
+
+			Rectangle rect3 = new Rectangle(
+				(int)Math.Ceiling(MatrixArea.X),
+				(int)Math.Ceiling(MatrixArea.Y),
+				(int)Math.Ceiling(MatrixArea.Width),
+				(int)Math.Ceiling(MatrixArea.Height)
+				);
+			Invalidate(rect3, true);
 		}
 
 		private void Form1_MouseLeave(object sender, EventArgs e)
