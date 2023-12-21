@@ -39,10 +39,14 @@
             this.lblCurrentRatio = new System.Windows.Forms.Label();
             this.nudColCnt = new System.Windows.Forms.NumericUpDown();
             this.btnReset = new System.Windows.Forms.Button();
+            this.nBackgroundOffsetX = new System.Windows.Forms.NumericUpDown();
             this.nudRowCnt = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.nBackgroundOffsetY = new System.Windows.Forms.NumericUpDown();
             this.lbColCnt = new System.Windows.Forms.Label();
             this.lbRowCnt = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnRemoveBackground = new System.Windows.Forms.Button();
             this.btnLoadBackground = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,11 +62,7 @@
             this.nBackgroundTextAlpha = new System.Windows.Forms.NumericUpDown();
             this.btnBackgroundTextFont = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.nBackgroundOffsetX = new System.Windows.Forms.NumericUpDown();
-            this.nBackgroundOffsetY = new System.Windows.Forms.NumericUpDown();
             this.nBackgroundTextSize = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtBackgroundText = new System.Windows.Forms.TextBox();
@@ -84,12 +84,12 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.gbControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColCnt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRowCnt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetY)).BeginInit();
             this.tlpProperty.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nDotAlpha)).BeginInit();
@@ -201,6 +201,11 @@
             this.nudColCnt.AutoSize = true;
             this.nudColCnt.Location = new System.Drawing.Point(66, 44);
             this.nudColCnt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudColCnt.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudColCnt.Minimum = new decimal(new int[] {
             1,
             0,
@@ -228,11 +233,35 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // nBackgroundOffsetX
+            // 
+            this.nBackgroundOffsetX.Location = new System.Drawing.Point(67, 126);
+            this.nBackgroundOffsetX.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nBackgroundOffsetX.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.nBackgroundOffsetX.Name = "nBackgroundOffsetX";
+            this.nBackgroundOffsetX.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundOffsetX.TabIndex = 4;
+            this.nBackgroundOffsetX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundOffsetX.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetX_ValueChanged);
+            // 
             // nudRowCnt
             // 
             this.nudRowCnt.AutoSize = true;
             this.nudRowCnt.Location = new System.Drawing.Point(66, 18);
             this.nudRowCnt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.nudRowCnt.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nudRowCnt.Minimum = new decimal(new int[] {
             1,
             0,
@@ -259,6 +288,25 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "Ratio :";
             // 
+            // nBackgroundOffsetY
+            // 
+            this.nBackgroundOffsetY.Location = new System.Drawing.Point(68, 97);
+            this.nBackgroundOffsetY.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nBackgroundOffsetY.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.nBackgroundOffsetY.Name = "nBackgroundOffsetY";
+            this.nBackgroundOffsetY.Size = new System.Drawing.Size(114, 21);
+            this.nBackgroundOffsetY.TabIndex = 4;
+            this.nBackgroundOffsetY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nBackgroundOffsetY.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetY_ValueChanged);
+            // 
             // lbColCnt
             // 
             this.lbColCnt.AutoSize = true;
@@ -276,6 +324,24 @@
             this.lbRowCnt.Size = new System.Drawing.Size(48, 12);
             this.lbRowCnt.TabIndex = 0;
             this.lbRowCnt.Text = "Height :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 99);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 12);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Offset Y :";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(11, 128);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 12);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Offset X :";
             // 
             // btnRemoveBackground
             // 
@@ -372,7 +438,7 @@
             this.cbBrushColor.TabIndex = 4;
             this.cbBrushColor.Text = "Brush";
             this.cbBrushColor.UseVisualStyleBackColor = true;
-            this.cbBrushColor.CheckedChanged += new System.EventHandler(this.cbFillColor_CheckedChanged);
+            this.cbBrushColor.CheckedChanged += new System.EventHandler(this.cbBrushColor_CheckedChanged);
             // 
             // tlpProperty
             // 
@@ -456,44 +522,6 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Alpha :";
             // 
-            // nBackgroundOffsetX
-            // 
-            this.nBackgroundOffsetX.Location = new System.Drawing.Point(67, 126);
-            this.nBackgroundOffsetX.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nBackgroundOffsetX.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.nBackgroundOffsetX.Name = "nBackgroundOffsetX";
-            this.nBackgroundOffsetX.Size = new System.Drawing.Size(114, 21);
-            this.nBackgroundOffsetX.TabIndex = 4;
-            this.nBackgroundOffsetX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nBackgroundOffsetX.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetX_ValueChanged);
-            // 
-            // nBackgroundOffsetY
-            // 
-            this.nBackgroundOffsetY.Location = new System.Drawing.Point(68, 97);
-            this.nBackgroundOffsetY.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nBackgroundOffsetY.Minimum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            -2147483648});
-            this.nBackgroundOffsetY.Name = "nBackgroundOffsetY";
-            this.nBackgroundOffsetY.Size = new System.Drawing.Size(114, 21);
-            this.nBackgroundOffsetY.TabIndex = 4;
-            this.nBackgroundOffsetY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.nBackgroundOffsetY.ValueChanged += new System.EventHandler(this.nBackgroundTextOffsetY_ValueChanged);
-            // 
             // nBackgroundTextSize
             // 
             this.nBackgroundTextSize.Location = new System.Drawing.Point(69, 21);
@@ -517,24 +545,6 @@
             0,
             0});
             this.nBackgroundTextSize.ValueChanged += new System.EventHandler(this.nBackgroundTextSize_ValueChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 128);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 12);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Offset X :";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 99);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 12);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Offset Y :";
             // 
             // label5
             // 
@@ -778,14 +788,14 @@
             this.gbControl.ResumeLayout(false);
             this.gbControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudColCnt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRowCnt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetY)).EndInit();
             this.tlpProperty.ResumeLayout(false);
             this.tlpProperty.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextAlpha)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nBackgroundOffsetY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBackgroundTextSize)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

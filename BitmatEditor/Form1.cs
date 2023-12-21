@@ -268,20 +268,32 @@ namespace BitmatEditor
 					this.Cursor = Cursors.Default;
 			}
 		}
-		private void cbFillColor_CheckedChanged(object sender, EventArgs e)
-		{
-			if(cbBrushColor.Checked)
-			{
-				this.Cursor = Cursors.Cross;
-				if (cbFillAreaColor.Checked)
-					cbFillAreaColor.Checked = false;
-			}
-			else
-			{
-				if (!cbFillAreaColor.Checked)
-					this.Cursor = Cursors.Default;
-			}
-		}
+
+        private void cbBrushColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbBrushColor.Checked)
+            {
+                this.Cursor = Cursors.Cross;
+                if (cbFillAreaColor.Checked)
+                    cbFillAreaColor.Checked = false;
+
+                if (SelectedIndex == -1)
+                {
+                    ListViewItem item = lvColorList.Items[0];
+
+                    SelectedColor = item.SubItems[2].BackColor;
+                    SelectedIndex = 0;
+                    lbSelectedColor.Text = item.SubItems[0].Text;
+                    lbSelectedColor.BackColor = (Color)SelectedColor;
+                }
+
+            }
+            else
+            {
+                if (!cbFillAreaColor.Checked)
+                    this.Cursor = Cursors.Default;
+            }
+        }
 
         private bool AddColorList(string name, Color? color)
         {
@@ -644,14 +656,13 @@ namespace BitmatEditor
 				ListViewItemChangeColor(item, Color.FromArgb((int)nDotAlpha.Value, color.R, color.G, color.B));
 			}
 
-			if(SelectedColor != null)
+			if(SelectedIndex != -1)
             {
-                SelectedColor = null;
-                SelectedIndex = -1;
-                lbSelectedColor.Text = "N";
-                lbSelectedColor.BackColor = Color.FromArgb(0, 0, 0, 0);
-				cbBrushColor.Checked = false;
-				cbFillAreaColor.Checked = false;
+                ListViewItem item = lvColorList.Items[SelectedIndex];
+
+                SelectedColor = item.SubItems[2].BackColor;
+                lbSelectedColor.Text = item.SubItems[0].Text;
+                lbSelectedColor.BackColor = (Color)SelectedColor;
             }
 
             Invalidate();
