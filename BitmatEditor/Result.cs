@@ -211,7 +211,7 @@ namespace BitmatEditor
 
             int selectedCnt = dgvResult.SelectedRows.Count;
             rtbGenCode.Clear();
-            rtbGenCode.AppendText(string.Format("var pointss{0} = new PointF[]\n{\n", txtVarSuffix.Text));
+            rtbGenCode.AppendText(string.Format("var pointss{0} = new PointF[]\n{{\n", txtVarSuffix.Text));
 
             if (selectedCnt < 2)
             {
@@ -248,7 +248,7 @@ namespace BitmatEditor
                 }
             }
 
-            rtbGenCode.AppendText("};\n");
+            rtbGenCode.AppendText("}};\n");
 
         }
 
